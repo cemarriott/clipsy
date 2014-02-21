@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/clipsy_splash"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/bNewVid"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="New"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/bEditVid"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="Edit"
+        android:textSize="20sp" />
+
+</LinearLayout>
