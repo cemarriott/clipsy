@@ -20,8 +20,9 @@ public class Splash extends Activity{
 					e.printStackTrace();
 				}
 				finally{
-					Intent openMainActivity = new Intent("com.tsp.Clipsy.MainMenu");
+					Intent openMainActivity = new Intent(Splash.this, MainMenu.class);
 					startActivity(openMainActivity);
+					
 				}
 			}
 		};
