@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/clipsy_splash"
-    android:orientation="vertical" >
+    android:orientation="horizontal" >
     
 <RelativeLayout 
     android:layout_width="wrap_content"
@@ -12,10 +12,11 @@
  
     <Button
         android:id="@+id/bNewVid"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="85dp"
         android:layout_width="150dp"
         android:layout_height="100dp"
-        android:layout_marginTop="600dp"
-        android:layout_marginLeft="150dp"
         android:text="New"
         android:textSize="20sp" />
         
@@ -24,8 +25,8 @@
         android:id="@+id/bEditVid"
         android:layout_width="150dp"
         android:layout_height="100dp"
- 		android:layout_toRightOf="@+id/bNewVid"
- 		android:layout_marginTop="600dp"
+ 		android:layout_below="@+id/bCamera"
+ 		android:layout_alignParentRight="true"
         android:text="Edit"
         android:textSize="20sp" />
     
@@ -34,7 +35,8 @@
         android:layout_width="150dp"
         android:layout_height="100dp"
  		android:layout_below="@+id/bNewVid"
- 		android:layout_marginLeft="225dp"
+ 		android:layout_alignParentRight="true"
+ 		android:layout_marginBottom="85dp"
  		android:src="@drawable/b_camera"
         />
 </RelativeLayout>		
