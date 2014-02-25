@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -41,6 +42,11 @@ public class MainMenu extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         //toast message hown after successful execution of the alert dialog
                         Toast.makeText(getApplicationContext(), "Making Project", Toast.LENGTH_SHORT).show();
+                        
+                        // TESTING THE FILE CHOOSER
+                        
+                        Intent openFileChooser = new Intent(MainMenu.this, FileChooser.class);
+    					startActivity(openFileChooser);
  
                     }
                 });
