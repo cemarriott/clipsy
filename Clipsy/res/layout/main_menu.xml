@@ -4,38 +4,40 @@
     android:layout_height="fill_parent"
     android:background="@drawable/clipsy_splash"
     android:orientation="vertical" >
-    
-<RelativeLayout 
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom" >
- 
-    <Button
-        android:id="@+id/bNewVid"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="600dp"
-        android:layout_marginLeft="150dp"
-        android:text="New"
-        android:textSize="20sp" />
-        
 
-    <Button
-        android:id="@+id/bEditVid"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
- 		android:layout_toRightOf="@+id/bNewVid"
- 		android:layout_marginTop="600dp"
-        android:text="Edit"
-        android:textSize="20sp" />
-    
-    <ImageButton 
-        android:id="@+id/bCamera"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
- 		android:layout_below="@+id/bNewVid"
- 		android:layout_marginLeft="225dp"
- 		android:src="@drawable/b_camera"
-        />
-</RelativeLayout>		
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/bNewVid"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/bEditVid"
+            android:layout_alignRight="@+id/bEditVid"
+            android:layout_marginBottom="20dp"
+            android:text="New"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/bEditVid"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/bCamera"
+            android:layout_alignRight="@+id/bCamera"
+            android:layout_marginBottom="20dp"
+            android:text="Edit"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/bCamera"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/b_camera" />
+    </RelativeLayout>
+
 </LinearLayout>
