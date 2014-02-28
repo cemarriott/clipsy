@@ -14,8 +14,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FileChooser extends Activity {
+	
+	String selectedAudioPath;
+	String selectedVideoPath;
 	
 	TextView audioPath;
 	TextView audioName;
@@ -25,6 +29,7 @@ public class FileChooser extends Activity {
 	
 	Button selectAudio;
 	Button selectVideo;
+	Button fcContinue;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,8 @@ public class FileChooser extends Activity {
 		audioName = (TextView) findViewById(R.id.fc_audioName);
 		audioPath = (TextView) findViewById(R.id.fc_audioPath);
 		selectAudio = (Button) findViewById(R.id.fc_selectAudio);
+		
+		fcContinue = (Button) findViewById(R.id.fc_continue);
 		
 		
 		 selectVideo.setOnClickListener(new View.OnClickListener() {
@@ -62,9 +69,66 @@ public class FileChooser extends Activity {
 	            	
 	            }
 	      });
+		 
+		 
+		 fcContinue.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View v) {
+	            	
+	            	if (selectedAudioPath != null) {
+	            		if (selectedVideoPath != null) {
+	            			
+	            			Intent openViewer = new Intent(FileChooser.this, Viewer.class);
+	            			Bundle view = new Bundle();
+	            			view.putString("audio", selectedAudioPath);
+	            			view.putString("video", selectedVideoPath);
+	            			openViewer.putExtras(view);
+	    					startActivity(openViewer);
+	            			
+	            		} else {
+	            			Toast.makeText(getApplicationContext(), "No video selected.", Toast.LENGTH_SHORT).show();
+	            		}
+	            		
+	            	} else {
+	            		Toast.makeText(getApplicationContext(), "No audio selected.", Toast.LENGTH_SHORT).show();
+	            	}
+	            	
+	            }
+	      });
 		
 		
 	}
+	
+	
+	public String getRealPathFromURI(Uri input, int type) {
+
+		if (type == 1) {
+			
+	        String [] proj={MediaStore.Video.Media.DATA};
+	        Cursor cursor = getContentResolver().query( input,
+	                        proj, // Which columns to return
+	                        null,       // WHERE clause; which rows to return (all rows)
+	                        null,       // WHERE clause selection arguments (none)
+	                        null); // Order-by clause (ascending by name)
+	        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
+	        cursor.moveToFirst();
+	
+	        return cursor.getString(column_index);
+	       
+		} else {
+			
+			String [] proj={MediaStore.Audio.Media.DATA};
+	        Cursor cursor = getContentResolver().query( input,
+	                        proj, // Which columns to return
+	                        null,       // WHERE clause; which rows to return (all rows)
+	                        null,       // WHERE clause selection arguments (none)
+	                        null); // Order-by clause (ascending by name)
+	        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+	        cursor.moveToFirst();
+	
+	       return cursor.getString(column_index);
+	       
+		}
+}
 	
 	
 	@Override
@@ -72,21 +136,27 @@ public class FileChooser extends Activity {
 		
 		if (requestCode == 1) {
 			  if(resultCode == RESULT_OK){
-				  String path = data.getData().getPath();
-				  String name = (new File(path)).getName();
+				  Uri path = data.getData();
 				  
-				  videoPath.setText(path);
+				  selectedVideoPath = getRealPathFromURI(path, 1);
+				  
+				  String name = (new File(selectedVideoPath)).getName();
+				  
+				  videoPath.setText(selectedVideoPath);
 				  videoName.setText(name);
 			  }
 			}
 			
 			if (requestCode == 2) {
 				  if(resultCode == RESULT_OK){
-					  String path = data.getData().getPath();
-					  String name = (new File(path)).getName();
+					  Uri path = data.getData();
 					  
-					  audioPath.setText(path);
-					  audioName.setText(name);
+					  selectedAudioPath = getRealPathFromURI(path, 2);
+					  
+					  String name = (new File(selectedAudioPath)).getName();
+					  
+					  videoPath.setText(selectedAudioPath);
+					  videoName.setText(name);
 				  }
 			}
 	}
