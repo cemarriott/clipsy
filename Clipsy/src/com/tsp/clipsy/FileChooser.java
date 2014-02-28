@@ -155,8 +155,8 @@ public class FileChooser extends Activity {
 					  
 					  String name = (new File(selectedAudioPath)).getName();
 					  
-					  videoPath.setText(selectedAudioPath);
-					  videoName.setText(name);
+					  audioPath.setText(selectedAudioPath);
+					  audioName.setText(name);
 				  }
 			}
 	}
