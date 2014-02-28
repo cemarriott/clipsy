@@ -17,28 +17,48 @@ import android.widget.TextView;
 
 public class FileChooser extends Activity {
 	
-	private static final int PICK_RESULT_CODE = 1;
+	TextView audioPath;
+	TextView audioName;
 	
-	TextView fileName;
-	TextView filePath;
-	Button selectFile;
+	TextView videoPath;
+	TextView videoName;
+	
+	Button selectAudio;
+	Button selectVideo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.file_chooser);
 		
-		fileName = (TextView) findViewById(R.id.fc_fileName);
-		selectFile = (Button) findViewById(R.id.selectFile);
-		filePath = (TextView) findViewById(R.id.fc_filePath);
+		videoName = (TextView) findViewById(R.id.fc_videoName);
+		videoPath = (TextView) findViewById(R.id.fc_videoPath);
+		selectVideo = (Button) findViewById(R.id.fc_selectVideo);
 		
-		 selectFile.setOnClickListener(new View.OnClickListener() {
+		audioName = (TextView) findViewById(R.id.fc_audioName);
+		audioPath = (TextView) findViewById(R.id.fc_audioPath);
+		selectAudio = (Button) findViewById(R.id.fc_selectAudio);
+		
+		
+		 selectVideo.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
 	            	
 	            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 	            	intent.setType("video/*");
 	            	intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-	            	startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_RESULT_CODE);
+	            	startActivityForResult(Intent.createChooser(intent, "Complete action using"), 1);
+	            	
+	            }
+	      });
+		 
+		 
+		 selectAudio.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View v) {
+	            	
+	            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+	            	intent.setType("audio/*");
+	            	intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+	            	startActivityForResult(Intent.createChooser(intent, "Complete action using"), 2);
 	            	
 	            }
 	      });
@@ -48,21 +68,28 @@ public class FileChooser extends Activity {
 	
 	
 	@Override
-	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
-		  switch (requestCode) {
-		  case PICK_RESULT_CODE:
+		if (requestCode == 1) {
 			  if(resultCode == RESULT_OK){
 				  String path = data.getData().getPath();
-				  String videoName = (new File(path)).getName();
+				  String name = (new File(path)).getName();
 				  
-				  
-				  filePath.setText(path);
-				  fileName.setText(videoName);
+				  videoPath.setText(path);
+				  videoName.setText(name);
 			  }
-			  break; 
-		  }
-	 }
+			}
+			
+			if (requestCode == 2) {
+				  if(resultCode == RESULT_OK){
+					  String path = data.getData().getPath();
+					  String name = (new File(path)).getName();
+					  
+					  audioPath.setText(path);
+					  audioName.setText(name);
+				  }
+			}
+	}
 	
 	
 
