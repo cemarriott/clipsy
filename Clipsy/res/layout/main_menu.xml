@@ -39,5 +39,10 @@
             android:layout_marginRight="20dp"
             android:src="@drawable/b_camera" />
     </RelativeLayout>
+<<<<<<< HEAD
 
 </LinearLayout>
+=======
+		
+</LinearLayout>
+>>>>>>> a003d1d03d92365c969ab4824d48c93d326cc5e7

@@ -3,7 +3,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/clipsy_splash"
+<<<<<<< HEAD
     android:orientation="horizontal" >
+=======
+    android:orientation="vertical" >
+>>>>>>> a003d1d03d92365c969ab4824d48c93d326cc5e7
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -39,5 +43,10 @@
             android:layout_marginRight="20dp"
             android:src="@drawable/b_camera" />
     </RelativeLayout>
+<<<<<<< HEAD
 
 </LinearLayout>
+=======
+		
+</LinearLayout>
+>>>>>>> a003d1d03d92365c969ab4824d48c93d326cc5e7
