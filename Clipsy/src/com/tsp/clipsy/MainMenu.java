@@ -6,14 +6,27 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainMenu extends Activity {
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.main_menu);
+		
+		ImageButton camera = (ImageButton) findViewById(R.id.bCamera);
+		camera.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				
+				Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+				startActivityForResult(intent, 0); 
+				
+			}
+        });
+		
 		
 		final Button bnewVid = (Button) findViewById(R.id.bNewVid);
         bnewVid.setOnClickListener(new View.OnClickListener() {

@@ -109,10 +109,15 @@ public class FileChooser extends Activity {
 	                        null,       // WHERE clause; which rows to return (all rows)
 	                        null,       // WHERE clause selection arguments (none)
 	                        null); // Order-by clause (ascending by name)
-	        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
-	        cursor.moveToFirst();
-	
-	        return cursor.getString(column_index);
+	        
+	        if (cursor != null) {
+		        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
+		        cursor.moveToFirst();
+		
+		        return cursor.getString(column_index);
+	        }
+	        
+	        return input.getPath();
 	       
 		} else {
 			
@@ -122,10 +127,15 @@ public class FileChooser extends Activity {
 	                        null,       // WHERE clause; which rows to return (all rows)
 	                        null,       // WHERE clause selection arguments (none)
 	                        null); // Order-by clause (ascending by name)
-	        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
-	        cursor.moveToFirst();
-	
-	       return cursor.getString(column_index);
+	        
+	        if (cursor != null) {
+		        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+		        cursor.moveToFirst();
+		
+		        return cursor.getString(column_index);
+	        }
+	        
+	        return input.getPath();
 	       
 		}
 }
