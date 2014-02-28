@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.View;
 import android.widget.MediaController;
-import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.VideoView;
 
