@@ -35,6 +35,7 @@
             android:name="com.tsp.clipsy.FileChooser"
             android:label="@string/title_activity_file_chooser" >
         </activity>
+        <activity android:name="com.tsp.clipsy.Viewer" android:label="@string/title_activity_viewer"></activity>
     </application>
 
 </manifest>
