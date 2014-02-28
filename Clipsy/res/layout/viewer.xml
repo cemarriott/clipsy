@@ -30,8 +30,10 @@
         android:id="@+id/videoView1"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:layout_above="@+id/playPause"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:fitsSystemWindows="false" />
 
 </RelativeLayout>
