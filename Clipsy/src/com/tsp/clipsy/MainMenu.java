@@ -1,10 +1,13 @@
 package com.tsp.clipsy;
 
+import com.tsp.clipsy.NewProjectDialog.NewProjectDialogListener;
+
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -15,7 +18,7 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-public class MainMenu extends Activity {
+public class MainMenu extends Activity implements NewProjectDialogListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,31 +28,32 @@ public class MainMenu extends Activity {
 		
 		final Button bnewVid = (Button) findViewById(R.id.bNewVid);
         bnewVid.setOnClickListener(new View.OnClickListener() {
+			@SuppressWarnings("deprecation")
 			public void onClick(View v) {
                 
-				//Initialising alert dialog
-                AlertDialog myAlertDialog = new AlertDialog.Builder(MainMenu.this).create();
-                //Adding the Title
-                myAlertDialog.setTitle("New Project");
-                //Adding Message
-                myAlertDialog.setMessage("Text thing here");
-                //adding an image
-                myAlertDialog.setIcon(R.drawable.ic_launcher);
-                //setting up OK button
-                myAlertDialog.setButton("OK", new DialogInterface.OnClickListener() {
- 
-                    public void onClick(DialogInterface dialog, int which) {
-                        //toast message hown after successful execution of the alert dialog
-                        Toast.makeText(getApplicationContext(), "Making Project", Toast.LENGTH_SHORT).show();
- 
-                    }
-                });
- 
-                //displaying the Alert message
-                myAlertDialog.show();
- 
-           
-            	
+//				//Initializing alert dialog
+//                AlertDialog myAlertDialog = new AlertDialog.Builder(MainMenu.this).create();
+//                //Adding the Title
+//                myAlertDialog.setTitle("New Project");
+//                //Adding Message
+//                myAlertDialog.setMessage("Text thing here");
+//                //adding an image
+//                myAlertDialog.setIcon(R.drawable.ic_launcher);
+//                //setting up OK button
+//                myAlertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+// 
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        //toast message hown after successful execution of the alert dialog
+//                        Toast.makeText(getApplicationContext(), "Making Project", Toast.LENGTH_SHORT).show();
+// 
+//                    }
+//                });
+// 
+//                //displaying the Alert message
+//                myAlertDialog.show();
+				
+				showNewProjectDialog();
+				
             }
         });
         
@@ -69,6 +73,16 @@ public class MainMenu extends Activity {
 		return true;
 	}
 	
+	private void showNewProjectDialog() {
+        FragmentManager fm = getFragmentManager();
+        NewProjectDialog newProjectDialog = new NewProjectDialog();
+       newProjectDialog.show(fm, "fragment_edit_name");
+    }
 
+	@Override
+	public void onFinishEditDialog(String inputText) {
+		Toast.makeText(this, "Making Project: " + inputText, Toast.LENGTH_SHORT).show();
+		
+	}
 
 }

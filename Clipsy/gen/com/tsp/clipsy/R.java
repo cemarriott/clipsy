@@ -26,17 +26,21 @@ public final class R {
         public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f080005;
-        public static final int bCamera=0x7f080002;
-        public static final int bEditVid=0x7f080001;
-        public static final int bNewVid=0x7f080000;
-        public static final int bt_alertdialog=0x7f080004;
-        public static final int textView1=0x7f080003;
+        public static final int action_settings=0x7f080008;
+        public static final int bCamera=0x7f080005;
+        public static final int bEditVid=0x7f080004;
+        public static final int bNewVid=0x7f080003;
+        public static final int bt_alertdialog=0x7f080007;
+        public static final int edit_name=0x7f080000;
+        public static final int lbl_your_project=0x7f080001;
+        public static final int project_name=0x7f080002;
+        public static final int textView1=0x7f080006;
     }
     public static final class layout {
-        public static final int main_menu=0x7f030000;
-        public static final int new_project=0x7f030001;
-        public static final int splash=0x7f030002;
+        public static final int fragment_new_project=0x7f030000;
+        public static final int main_menu=0x7f030001;
+        public static final int new_project=0x7f030002;
+        public static final int splash=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f070000;
