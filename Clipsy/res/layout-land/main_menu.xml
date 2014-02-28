@@ -3,41 +3,41 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/clipsy_splash"
-    android:orientation="horizontal" >
-    
-<RelativeLayout 
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom" >
- 
-    <Button
-        android:id="@+id/bNewVid"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="85dp"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:text="New"
-        android:textSize="20sp" />
-        
+    android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/bEditVid"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
- 		android:layout_below="@+id/bCamera"
- 		android:layout_alignParentRight="true"
-        android:text="Edit"
-        android:textSize="20sp" />
-    
-    <ImageButton 
-        android:id="@+id/bCamera"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
- 		android:layout_below="@+id/bNewVid"
- 		android:layout_alignParentRight="true"
- 		android:layout_marginBottom="85dp"
- 		android:src="@drawable/b_camera"
-        />
-</RelativeLayout>		
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/bNewVid"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/bEditVid"
+            android:layout_alignRight="@+id/bEditVid"
+            android:layout_marginBottom="20dp"
+            android:text="New"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/bEditVid"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/bCamera"
+            android:layout_alignRight="@+id/bCamera"
+            android:layout_marginBottom="20dp"
+            android:text="Edit"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/bCamera"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/b_camera" />
+    </RelativeLayout>
+		
 </LinearLayout>
