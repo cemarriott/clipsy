@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<previews>
+
+    <preview
+        name="Config1"
+        activity="com.tsp.clipsy.MainMenu"
+        config="layout-sw320dp-w320dp-h533dp-normal-long-port-notnight-hdpi-finger-keyssoft-nokeys-navexposed-trackball-800x480-v18"
+        device="3.7in WVGA (Nexus One)"
+        devicestate="Portrait"
+        target="Android 4.3"
+        theme="@style/AppTheme" >
+    </preview>
+
+</previews>
