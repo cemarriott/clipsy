@@ -33,7 +33,8 @@
         </activity>
         <activity
             android:name="com.tsp.clipsy.FileChooser"
-            android:label="@string/title_activity_file_chooser" >
+            android:label="@string/title_activity_file_chooser"
+            android:parentActivityName="com.tsp.clipsy.MainMenu" >
         </activity>
     </application>
 
