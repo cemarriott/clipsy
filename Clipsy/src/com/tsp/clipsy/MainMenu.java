@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -31,6 +32,7 @@ public class MainMenu extends Activity implements NewProjectDialogListener {
 			@SuppressWarnings("deprecation")
 			public void onClick(View v) {
                 
+<<<<<<< HEAD
 //				//Initializing alert dialog
 //                AlertDialog myAlertDialog = new AlertDialog.Builder(MainMenu.this).create();
 //                //Adding the Title
@@ -54,6 +56,36 @@ public class MainMenu extends Activity implements NewProjectDialogListener {
 				
 				showNewProjectDialog();
 				
+=======
+				//Initialising alert dialog
+                AlertDialog myAlertDialog = new AlertDialog.Builder(MainMenu.this).create();
+                //Adding the Title
+                myAlertDialog.setTitle("New Project");
+                //Adding Message
+                myAlertDialog.setMessage("Text thing here");
+                //adding an image
+                myAlertDialog.setIcon(R.drawable.ic_launcher);
+                //setting up OK button
+                myAlertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+ 
+                    public void onClick(DialogInterface dialog, int which) {
+                        //toast message hown after successful execution of the alert dialog
+                        Toast.makeText(getApplicationContext(), "Making Project", Toast.LENGTH_SHORT).show();
+                        
+                        // TESTING THE FILE CHOOSER
+                        
+                        Intent openFileChooser = new Intent(MainMenu.this, FileChooser.class);
+    					startActivity(openFileChooser);
+ 
+                    }
+                });
+ 
+                //displaying the Alert message
+                myAlertDialog.show();
+ 
+           
+            	
+>>>>>>> origin/master
             }
         });
         

@@ -2,6 +2,7 @@
 ## Eclipse
 #################
 
+/bin
 *.pydevproject
 .project
 .metadata
@@ -213,3 +214,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+Clipsy/bin/
