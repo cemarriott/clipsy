@@ -21,7 +21,7 @@ public class MainMenu extends Activity {
 		camera.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				
-				Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+				Intent intent = new Intent("android.media.action.VIDEO_CAPTURE");
 				startActivityForResult(intent, 0); 
 				
 			}
