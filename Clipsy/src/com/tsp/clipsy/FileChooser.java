@@ -3,6 +3,7 @@ package com.tsp.clipsy;
 import java.io.File;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
@@ -45,30 +46,59 @@ public class FileChooser extends Activity {
 		fcContinue = (Button) findViewById(R.id.fc_continue);
 		
 		
+		// Select Video button
 		 selectVideo.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
 	            	
-	            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-	            	intent.setType("video/*");
-	            	intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-	            	startActivityForResult(Intent.createChooser(intent, "Complete action using"), 1);
+	            	// Older versions of Android
+	            	if (Build.VERSION.SDK_INT <19) {
+	            	
+	            		// Request that the user pick a video file
+		            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+		            	intent.setType("video/*");
+		            	intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+		            	startActivityForResult(Intent.createChooser(intent, "Complete action using"), 1);
+	            	
+	            	} else {
+	            		
+	            		// Kitkat-specific
+	            		Intent intent = new Intent(Intent.ACTION_PICK);
+	            		intent.setType("video/*");
+		            	intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+	            		startActivityForResult(Intent.createChooser(intent, "Complete action using"), 1);
+	            		
+	            	}
 	            	
 	            }
 	      });
 		 
 		 
+		 // Select Audio button
 		 selectAudio.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
 	            	
-	            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-	            	intent.setType("audio/*");
-	            	intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-	            	startActivityForResult(Intent.createChooser(intent, "Complete action using"), 2);
+	            	// Older versions of Android
+	            	if (Build.VERSION.SDK_INT < 19) {
+	            	
+	            		// Request that user picks an audio file
+		            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+		            	intent.setType("audio/*");
+		            	intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+		            	startActivityForResult(Intent.createChooser(intent, "Complete action using"), 2);
+	            	
+	            	} else {
+	            		
+	            		// Kitkat-specific
+	            		Intent intent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+	            		startActivityForResult(Intent.createChooser(intent, "Complete action using"), 2);
+	            		
+	            	}
 	            	
 	            }
 	      });
 		 
 		 
+		 // Continue button
 		 fcContinue.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
 	            	
@@ -97,8 +127,14 @@ public class FileChooser extends Activity {
 	}
 	
 	
+	/*
+	 * Built-in apps like Gallery return a content URI that isn't suitable for 
+	 * opening files. So we have to take the URI and find the absolute file
+	 * path using MediaStore.
+	 */
 	public String getRealPathFromURI(Uri input, int type) {
 
+		// Video section
 		if (type == 1) {
 			
 	        String [] proj={MediaStore.Video.Media.DATA};
@@ -108,6 +144,10 @@ public class FileChooser extends Activity {
 	                        null,       // WHERE clause selection arguments (none)
 	                        null); // Order-by clause (ascending by name)
 	        
+	        
+	        // If the cursor is null, then we got the path from a 3rd-party app
+	        // (not Gallery) so it's already an absolute path, so it isn't 
+	        // found in MediaStore and the cursor is null.
 	        if (cursor != null) {
 		        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
 		        cursor.moveToFirst();
@@ -119,6 +159,8 @@ public class FileChooser extends Activity {
 	       
 		} else {
 			
+			// Audio section
+			
 			String [] proj={MediaStore.Audio.Media.DATA};
 	        Cursor cursor = getContentResolver().query( input,
 	                        proj, // Which columns to return
@@ -126,6 +168,7 @@ public class FileChooser extends Activity {
 	                        null,       // WHERE clause selection arguments (none)
 	                        null); // Order-by clause (ascending by name)
 	        
+	        // 3rd-party app = already an absolute path, so not found in MediaStore.
 	        if (cursor != null) {
 		        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
 		        cursor.moveToFirst();
