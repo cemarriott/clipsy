@@ -39,15 +39,6 @@ public class MainMenu extends Activity {
 			}
         });
 	
-        
-        
-        final Button beditVid = (Button) findViewById(R.id.bEditVid);
-        beditVid.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                
-            	System.out.println("edit button clicked");
-            }
-        });
 	}
 
 	@Override

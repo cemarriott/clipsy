@@ -7,27 +7,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/bNewVid"
-            android:layout_width="75dp"
-            android:layout_height="50dp"
-            android:layout_above="@+id/bEditVid"
-            android:layout_alignRight="@+id/bEditVid"
-            android:layout_marginBottom="20dp"
-            android:text="New"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/bEditVid"
-            android:layout_width="75dp"
-            android:layout_height="50dp"
-            android:layout_above="@+id/bCamera"
-            android:layout_alignRight="@+id/bCamera"
-            android:layout_marginBottom="20dp"
-            android:text="Edit"
-            android:textSize="20sp" />
+        android:layout_height="match_parent" >
 
         <ImageButton
             android:id="@+id/bCamera"
@@ -35,9 +15,21 @@
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginBottom="60dp"
+            android:layout_marginRight="60dp"
+            android:baselineAlignBottom="true"
             android:src="@drawable/b_camera" />
+
+        <Button
+            android:id="@+id/bNewVid"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/bCamera"
+            android:layout_alignLeft="@+id/bCamera"
+            android:layout_marginBottom="20dp"
+            android:text="New"
+            android:textSize="20sp" />
+
     </RelativeLayout>
 
 </LinearLayout>
