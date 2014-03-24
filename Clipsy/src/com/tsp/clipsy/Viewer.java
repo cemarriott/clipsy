@@ -34,7 +34,7 @@ public class Viewer extends Activity implements SeekBar.OnSeekBarChangeListener 
 
 
 		// Video portion
-		VideoView videoView = (VideoView) findViewById(R.id.videoView1);
+		VideoView videoView = (VideoView) findViewById(R.id.previewView);
 		videoView.setVideoPath(videoPath);
 
 		MediaController mediaController = new MediaController(this);

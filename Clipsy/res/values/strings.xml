@@ -11,5 +11,8 @@
     <string name="title_section1">Preview</string>
     <string name="title_section2">Video</string>
     <string name="title_section3">Audio</string>
+    <string name="title_activity_preview_fragment">PreviewFragment</string>
+    <string name="title_activity_video_fragment">VideoFragment</string>
+    <string name="title_activity_audio_fragment">AudioFragment</string>
 
 </resources>

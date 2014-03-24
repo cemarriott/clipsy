@@ -50,6 +50,18 @@
             android:label="@string/title_activity_preview"
             android:parentActivityName="com.tsp.clipsy.FileChooser" >
         </activity>
+        <activity
+            android:name="com.tsp.clipsy.PreviewFragment"
+            android:label="@string/title_activity_preview_fragment" >
+        </activity>
+        <activity
+            android:name="com.tsp.clipsy.VideoFragment"
+            android:label="@string/title_activity_video_fragment" >
+        </activity>
+        <activity
+            android:name="com.tsp.clipsy.AudioFragment"
+            android:label="@string/title_activity_audio_fragment" >
+        </activity>
     </application>
 
 </manifest>
