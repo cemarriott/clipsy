@@ -2,16 +2,22 @@ package com.tsp.clipsy;
 
 import java.io.File;
 
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +44,6 @@ public class FileChooser extends Activity {
 		videoName = (TextView) findViewById(R.id.fc_videoName);
 		videoPath = (TextView) findViewById(R.id.fc_videoPath);
 		selectVideo = (Button) findViewById(R.id.fc_selectVideo);
-		
 		fcContinue = (Button) findViewById(R.id.fc_continue);
 		
 		
@@ -151,6 +156,8 @@ public class FileChooser extends Activity {
 	} 
 	
 	
+	@SuppressLint("NewApi")
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
@@ -163,6 +170,37 @@ public class FileChooser extends Activity {
 			  
 			videoPath.setText(selectedVideoPath);
 			videoName.setText(name);
+			
+			MediaMetadataRetriever retrieve = new MediaMetadataRetriever();
+			retrieve.setDataSource(selectedVideoPath);
+			
+			long durationMs = Long.parseLong(retrieve.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+			
+			Bitmap thumb = retrieve.getFrameAtTime(durationMs/2, 1);
+			
+			int screenWidth;
+			Display display = getWindowManager().getDefaultDisplay();
+			
+			if (android.os.Build.VERSION.SDK_INT >= 13) {
+				Point size = new Point();
+				display.getSize(size);
+				screenWidth = size.x;
+			} else {
+				screenWidth = display.getWidth();
+			}
+			
+			int newHeight = (screenWidth * thumb.getHeight()/thumb.getWidth());
+			Bitmap newThumb = Bitmap.createScaledBitmap(thumb, screenWidth, newHeight, true);
+			
+			ImageView thumbView = (ImageView) findViewById(R.id.thumbView);
+			thumbView.setImageBitmap(newThumb);
+			thumbView.setAdjustViewBounds(false);
+			thumbView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+			
+			
+	    } else {
+	    	Toast.makeText(getApplicationContext(), "An error occured. Please try again.",
+	    			Toast.LENGTH_LONG).show();
 	    }
 	}
 	
