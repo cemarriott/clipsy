@@ -7,8 +7,11 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="19" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:maxSdkVersion="19" android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="19" />
 
     <application
         android:allowBackup="true"
@@ -38,7 +41,15 @@
             android:label="@string/title_activity_file_chooser"
             android:parentActivityName="com.tsp.clipsy.MainMenu" >
         </activity>
-        <activity android:name="com.tsp.clipsy.Viewer" android:label="@string/title_activity_viewer"></activity>
+        <activity
+            android:name="com.tsp.clipsy.Viewer"
+            android:label="@string/title_activity_viewer" >
+        </activity>
+        <activity
+            android:name="com.tsp.clipsy.PreviewActivity"
+            android:label="@string/title_activity_preview"
+            android:parentActivityName="com.tsp.clipsy.FileChooser" >
+        </activity>
     </application>
 
 </manifest>

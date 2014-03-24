@@ -53,62 +53,19 @@
         android:id="@+id/fc_selectVideo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fc_videoName"
+        android:layout_above="@+id/fc_continue"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
         android:text="Select Video" />
 
-    <TextView
-        android:id="@+id/textView3"
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/fc_selectVideo"
-        android:layout_marginTop="41dp"
-        android:text="Selected Audio:"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/fc_audioPath"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/textView3"
-        android:maxWidth="150dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:width="150dp" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_below="@+id/textView3"
-        android:text="Filename:"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/fc_audioName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView5"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/textView5"
-        android:maxWidth="150dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:width="150dp" />
-
-    <Button
-        android:id="@+id/fc_selectAudio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fc_audioName"
+        android:layout_below="@+id/fc_videoName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:text="Select Audio" />
+        android:layout_marginTop="30dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/no_video" />
 
     <Button
         android:id="@+id/fc_continue"
@@ -116,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="51dp"
+        android:layout_marginBottom="50dp"
         android:text="Continue" />
 
 </RelativeLayout>

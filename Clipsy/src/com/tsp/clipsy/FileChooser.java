@@ -39,10 +39,6 @@ public class FileChooser extends Activity {
 		videoPath = (TextView) findViewById(R.id.fc_videoPath);
 		selectVideo = (Button) findViewById(R.id.fc_selectVideo);
 		
-		audioName = (TextView) findViewById(R.id.fc_audioName);
-		audioPath = (TextView) findViewById(R.id.fc_audioPath);
-		selectAudio = (Button) findViewById(R.id.fc_selectAudio);
-		
 		fcContinue = (Button) findViewById(R.id.fc_continue);
 		
 		
@@ -73,6 +69,8 @@ public class FileChooser extends Activity {
 	      });
 		 
 		 
+		 
+		 /*    Not used here anymore, but may still be useful later.
 		 // Select Audio button
 		 selectAudio.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
@@ -96,31 +94,27 @@ public class FileChooser extends Activity {
 	            	
 	            }
 	      });
+	      */
 		 
 		 
 		 // Continue button
 		 fcContinue.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
 	            	
-	            	if (selectedAudioPath != null) {
-	            		if (selectedVideoPath != null) {
-	            			
-	            			Intent openViewer = new Intent(FileChooser.this, Viewer.class);
-	            			Bundle view = new Bundle();
-	            			view.putString("audio", selectedAudioPath);
-	            			view.putString("video", selectedVideoPath);
-	            			openViewer.putExtras(view);
-	    					startActivity(openViewer);
-	            			
-	            		} else {
-	            			Toast.makeText(getApplicationContext(), "No video selected.", Toast.LENGTH_SHORT).show();
-	            		}
-	            		
-	            	} else {
-	            		Toast.makeText(getApplicationContext(), "No audio selected.", Toast.LENGTH_SHORT).show();
-	            	}
+            		if (selectedVideoPath != null) {
+            			
+            			Intent openPreview = new Intent(FileChooser.this, PreviewActivity.class);
+            			Bundle view = new Bundle();
+            			view.putString("video", selectedVideoPath);
+            			openPreview.putExtras(view);
+    					startActivity(openPreview);
+            			
+            		} else {
+            			Toast.makeText(getApplicationContext(), "No video selected.", Toast.LENGTH_SHORT).show();
+            		}
+            		
+            	}
 	            	
-	            }
 	      });
 		
 		
@@ -132,84 +126,44 @@ public class FileChooser extends Activity {
 	 * opening files. So we have to take the URI and find the absolute file
 	 * path using MediaStore.
 	 */
-	public String getRealPathFromURI(Uri input, int type) {
-
-		// Video section
-		if (type == 1) {
+	public String getRealPathFromURI(Uri input) {
 			
-	        String [] proj={MediaStore.Video.Media.DATA};
-	        Cursor cursor = getContentResolver().query( input,
-	                        proj, // Which columns to return
-	                        null,       // WHERE clause; which rows to return (all rows)
-	                        null,       // WHERE clause selection arguments (none)
-	                        null); // Order-by clause (ascending by name)
-	        
-	        
-	        // If the cursor is null, then we got the path from a 3rd-party app
-	        // (not Gallery) so it's already an absolute path, so it isn't 
-	        // found in MediaStore and the cursor is null.
-	        if (cursor != null) {
-		        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
-		        cursor.moveToFirst();
-		
-		        return cursor.getString(column_index);
-	        }
-	        
-	        return input.getPath();
+		String [] proj={MediaStore.Video.Media.DATA};
+        Cursor cursor = getContentResolver().query( input,
+                        proj, // Which columns to return
+                        null,       // WHERE clause; which rows to return (all rows)
+                        null,       // WHERE clause selection arguments (none)
+                        null); // Order-by clause (ascending by name)
+        
+        
+        // If the cursor is null, then we got the path from a 3rd-party app
+        // (not Gallery) so it's already an absolute path, so it isn't 
+        // found in MediaStore and the cursor is null.
+        if (cursor != null) {
+	        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
+	        cursor.moveToFirst();
+	
+	        return cursor.getString(column_index);
+        }
+        
+        return input.getPath();
 	       
-		} else {
-			
-			// Audio section
-			
-			String [] proj={MediaStore.Audio.Media.DATA};
-	        Cursor cursor = getContentResolver().query( input,
-	                        proj, // Which columns to return
-	                        null,       // WHERE clause; which rows to return (all rows)
-	                        null,       // WHERE clause selection arguments (none)
-	                        null); // Order-by clause (ascending by name)
-	        
-	        // 3rd-party app = already an absolute path, so not found in MediaStore.
-	        if (cursor != null) {
-		        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
-		        cursor.moveToFirst();
-		
-		        return cursor.getString(column_index);
-	        }
-	        
-	        return input.getPath();
-	       
-		}
-}
+	} 
 	
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
-		if (requestCode == 1) {
-			  if(resultCode == RESULT_OK){
-				  Uri path = data.getData();
-				  
-				  selectedVideoPath = getRealPathFromURI(path, 1);
-				  
-				  String name = (new File(selectedVideoPath)).getName();
-				  
-				  videoPath.setText(selectedVideoPath);
-				  videoName.setText(name);
-			  }
-			}
-			
-			if (requestCode == 2) {
-				  if(resultCode == RESULT_OK){
-					  Uri path = data.getData();
-					  
-					  selectedAudioPath = getRealPathFromURI(path, 2);
-					  
-					  String name = (new File(selectedAudioPath)).getName();
-					  
-					  audioPath.setText(selectedAudioPath);
-					  audioName.setText(name);
-				  }
-			}
+		if(resultCode == RESULT_OK){
+			Uri path = data.getData();
+			  
+			selectedVideoPath = getRealPathFromURI(path);
+			  
+			String name = (new File(selectedVideoPath)).getName();
+			  
+			videoPath.setText(selectedVideoPath);
+			videoName.setText(name);
+	    }
 	}
 	
 	

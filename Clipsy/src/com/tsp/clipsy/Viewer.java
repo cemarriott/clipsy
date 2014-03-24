@@ -41,12 +41,13 @@ public class Viewer extends Activity implements SeekBar.OnSeekBarChangeListener 
 		mediaController.setAnchorView(videoView);
 		videoView.setMediaController(mediaController);
 
-
+		/*
 		// Audio portion
 		mSeek = (SeekBar) findViewById(R.id.seekBar);
 		mPlayer = new MediaPlayer();
 		mSeek.setOnSeekBarChangeListener(this); // listen to seekbar touches
 		prepareSong();
+		*/
 
 	}
 
