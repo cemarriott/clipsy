@@ -93,6 +93,7 @@
             android:layout_marginRight="50dip"
             android:contentDescription="End"
             android:gravity="center"
+            android:inputType="number|numberDecimal"
             android:nextFocusLeft="@+id/starttext"
             android:nextFocusRight="@+id/save"
             android:textSize="16sp" />
