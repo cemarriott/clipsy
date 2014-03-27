@@ -131,5 +131,5 @@ public class Viewer extends Activity implements SeekBar.OnSeekBarChangeListener 
 			mHandler.postDelayed(this, 100);
 		}
 	};
-
+	
 }
