@@ -27,7 +27,7 @@
         android:text="@string/play_pause" />
 
     <VideoView
-        android:id="@+id/videoView1"
+        android:id="@+id/previewView"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_above="@+id/playPause"

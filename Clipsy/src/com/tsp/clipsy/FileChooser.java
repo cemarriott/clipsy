@@ -2,17 +2,22 @@ package com.tsp.clipsy;
 
 import java.io.File;
 
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.view.Display;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,136 +44,164 @@ public class FileChooser extends Activity {
 		videoName = (TextView) findViewById(R.id.fc_videoName);
 		videoPath = (TextView) findViewById(R.id.fc_videoPath);
 		selectVideo = (Button) findViewById(R.id.fc_selectVideo);
-		
-		audioName = (TextView) findViewById(R.id.fc_audioName);
-		audioPath = (TextView) findViewById(R.id.fc_audioPath);
-		selectAudio = (Button) findViewById(R.id.fc_selectAudio);
-		
 		fcContinue = (Button) findViewById(R.id.fc_continue);
 		
 		
+		// Select Video button
 		 selectVideo.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
 	            	
-	            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-	            	intent.setType("video/*");
-	            	intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-	            	startActivityForResult(Intent.createChooser(intent, "Complete action using"), 1);
+	            	// Older versions of Android
+	            	if (Build.VERSION.SDK_INT <19) {
 	            	
-	            }
-	      });
-		 
-		 
-		 selectAudio.setOnClickListener(new View.OnClickListener() {
-	            public void onClick(View v) {
+	            		// Request that the user pick a video file
+		            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+		            	intent.setType("video/*");
+		            	intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+		            	startActivityForResult(Intent.createChooser(intent, "Complete action using"), 1);
 	            	
-	            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-	            	intent.setType("audio/*");
-	            	intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-	            	startActivityForResult(Intent.createChooser(intent, "Complete action using"), 2);
-	            	
-	            }
-	      });
-		 
-		 
-		 fcContinue.setOnClickListener(new View.OnClickListener() {
-	            public void onClick(View v) {
-	            	
-	            	if (selectedAudioPath != null) {
-	            		if (selectedVideoPath != null) {
-	            			
-	            			Intent openViewer = new Intent(FileChooser.this, Viewer.class);
-	            			Bundle view = new Bundle();
-	            			view.putString("audio", selectedAudioPath);
-	            			view.putString("video", selectedVideoPath);
-	            			openViewer.putExtras(view);
-	    					startActivity(openViewer);
-	            			
-	            		} else {
-	            			Toast.makeText(getApplicationContext(), "No video selected.", Toast.LENGTH_SHORT).show();
-	            		}
-	            		
 	            	} else {
-	            		Toast.makeText(getApplicationContext(), "No audio selected.", Toast.LENGTH_SHORT).show();
+	            		
+	            		// Kitkat-specific
+	            		Intent intent = new Intent(Intent.ACTION_PICK);
+	            		intent.setType("video/*");
+		            	intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+	            		startActivityForResult(Intent.createChooser(intent, "Complete action using"), 1);
+	            		
 	            	}
 	            	
 	            }
+	      });
+		 
+		 
+		 
+		 /*    Not used here anymore, but may still be useful later.
+		 // Select Audio button
+		 selectAudio.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View v) {
+	            	
+	            	// Older versions of Android
+	            	if (Build.VERSION.SDK_INT < 19) {
+	            	
+	            		// Request that user picks an audio file
+		            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+		            	intent.setType("audio/*");
+		            	intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+		            	startActivityForResult(Intent.createChooser(intent, "Complete action using"), 2);
+	            	
+	            	} else {
+	            		
+	            		// Kitkat-specific
+	            		Intent intent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+	            		startActivityForResult(Intent.createChooser(intent, "Complete action using"), 2);
+	            		
+	            	}
+	            	
+	            }
+	      });
+	      */
+		 
+		 
+		 // Continue button
+		 fcContinue.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View v) {
+	            	
+            		if (selectedVideoPath != null) {
+            			
+            			Intent openPreview = new Intent(FileChooser.this, PreviewActivity.class);
+            			Bundle view = new Bundle();
+            			view.putString("video", selectedVideoPath);
+            			openPreview.putExtras(view);
+    					startActivity(openPreview);
+            			
+            		} else {
+            			Toast.makeText(getApplicationContext(), "No video selected.", Toast.LENGTH_SHORT).show();
+            		}
+            		
+            	}
+	            	
 	      });
 		
 		
 	}
 	
 	
-	public String getRealPathFromURI(Uri input, int type) {
-
-		if (type == 1) {
+	/*
+	 * Built-in apps like Gallery return a content URI that isn't suitable for 
+	 * opening files. So we have to take the URI and find the absolute file
+	 * path using MediaStore.
+	 */
+	public String getRealPathFromURI(Uri input) {
 			
-	        String [] proj={MediaStore.Video.Media.DATA};
-	        Cursor cursor = getContentResolver().query( input,
-	                        proj, // Which columns to return
-	                        null,       // WHERE clause; which rows to return (all rows)
-	                        null,       // WHERE clause selection arguments (none)
-	                        null); // Order-by clause (ascending by name)
-	        
-	        if (cursor != null) {
-		        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
-		        cursor.moveToFirst();
-		
-		        return cursor.getString(column_index);
-	        }
-	        
-	        return input.getPath();
+		String [] proj={MediaStore.Video.Media.DATA};
+        Cursor cursor = getContentResolver().query( input,
+                        proj, // Which columns to return
+                        null,       // WHERE clause; which rows to return (all rows)
+                        null,       // WHERE clause selection arguments (none)
+                        null); // Order-by clause (ascending by name)
+        
+        
+        // If the cursor is null, then we got the path from a 3rd-party app
+        // (not Gallery) so it's already an absolute path, so it isn't 
+        // found in MediaStore and the cursor is null.
+        if (cursor != null) {
+	        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
+	        cursor.moveToFirst();
+	
+	        return cursor.getString(column_index);
+        }
+        
+        return input.getPath();
 	       
-		} else {
-			
-			String [] proj={MediaStore.Audio.Media.DATA};
-	        Cursor cursor = getContentResolver().query( input,
-	                        proj, // Which columns to return
-	                        null,       // WHERE clause; which rows to return (all rows)
-	                        null,       // WHERE clause selection arguments (none)
-	                        null); // Order-by clause (ascending by name)
-	        
-	        if (cursor != null) {
-		        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
-		        cursor.moveToFirst();
-		
-		        return cursor.getString(column_index);
-	        }
-	        
-	        return input.getPath();
-	       
-		}
-}
+	} 
 	
 	
+	@SuppressLint("NewApi")
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
-		if (requestCode == 1) {
-			  if(resultCode == RESULT_OK){
-				  Uri path = data.getData();
-				  
-				  selectedVideoPath = getRealPathFromURI(path, 1);
-				  
-				  String name = (new File(selectedVideoPath)).getName();
-				  
-				  videoPath.setText(selectedVideoPath);
-				  videoName.setText(name);
-			  }
+		if(resultCode == RESULT_OK){
+			Uri path = data.getData();
+			  
+			selectedVideoPath = getRealPathFromURI(path);
+			  
+			String name = (new File(selectedVideoPath)).getName();
+			  
+			videoPath.setText(selectedVideoPath);
+			videoName.setText(name);
+			
+			MediaMetadataRetriever retrieve = new MediaMetadataRetriever();
+			retrieve.setDataSource(selectedVideoPath);
+			
+			long durationMs = Long.parseLong(retrieve.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+			
+			Bitmap thumb = retrieve.getFrameAtTime(durationMs/2, 1);
+			
+			int screenWidth;
+			Display display = getWindowManager().getDefaultDisplay();
+			
+			if (android.os.Build.VERSION.SDK_INT >= 13) {
+				Point size = new Point();
+				display.getSize(size);
+				screenWidth = size.x;
+			} else {
+				screenWidth = display.getWidth();
 			}
 			
-			if (requestCode == 2) {
-				  if(resultCode == RESULT_OK){
-					  Uri path = data.getData();
-					  
-					  selectedAudioPath = getRealPathFromURI(path, 2);
-					  
-					  String name = (new File(selectedAudioPath)).getName();
-					  
-					  audioPath.setText(selectedAudioPath);
-					  audioName.setText(name);
-				  }
-			}
+			int newHeight = (screenWidth * thumb.getHeight()/thumb.getWidth());
+			Bitmap newThumb = Bitmap.createScaledBitmap(thumb, screenWidth, newHeight, true);
+			
+			ImageView thumbView = (ImageView) findViewById(R.id.thumbView);
+			thumbView.setImageBitmap(newThumb);
+			thumbView.setAdjustViewBounds(false);
+			thumbView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+			
+			
+	    } else {
+	    	Toast.makeText(getApplicationContext(), "An error occured. Please try again.",
+	    			Toast.LENGTH_LONG).show();
+	    }
 	}
 	
 	

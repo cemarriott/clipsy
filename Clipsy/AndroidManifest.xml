@@ -5,9 +5,13 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+        android:minSdkVersion="11"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="19" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +20,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.tsp.clipsy.Splash"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+    		android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +30,8 @@
         </activity>
         <activity
             android:name="com.tsp.clipsy.MainMenu"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,9 +41,32 @@
         <activity
             android:name="com.tsp.clipsy.FileChooser"
             android:label="@string/title_activity_file_chooser"
-            android:parentActivityName="com.tsp.clipsy.MainMenu" >
+            android:parentActivityName="com.tsp.clipsy.MainMenu"
+            android:screenOrientation="landscape" >
         </activity>
-        <activity android:name="com.tsp.clipsy.Viewer" android:label="@string/title_activity_viewer"></activity>
+        <activity
+            android:name="com.tsp.clipsy.Viewer"
+            android:label="@string/title_activity_viewer"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.tsp.clipsy.PreviewActivity"
+            android:label="@string/title_activity_preview"
+            android:parentActivityName="com.tsp.clipsy.FileChooser" 
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.tsp.clipsy.PreviewFragment"
+            android:label="@string/title_activity_preview_fragment" >
+        </activity>
+        <activity
+            android:name="com.tsp.clipsy.VideoFragment"
+            android:label="@string/title_activity_video_fragment" >
+        </activity>
+        <activity
+            android:name="com.tsp.clipsy.AudioFragment"
+            android:label="@string/title_activity_audio_fragment" >
+        </activity>
     </application>
 
 </manifest>

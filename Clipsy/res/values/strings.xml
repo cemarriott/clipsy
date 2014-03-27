@@ -7,5 +7,12 @@
     <string name="title_activity_file_chooser">FileChooser</string>
     <string name="play_pause">Play/Pause</string>
     <string name="title_activity_viewer">Viewer</string>
+    <string name="title_activity_preview">PreviewActivity</string>
+    <string name="title_section1">Preview</string>
+    <string name="title_section2">Video</string>
+    <string name="title_section3">Audio</string>
+    <string name="title_activity_preview_fragment">PreviewFragment</string>
+    <string name="title_activity_video_fragment">VideoFragment</string>
+    <string name="title_activity_audio_fragment">AudioFragment</string>
 
 </resources>
