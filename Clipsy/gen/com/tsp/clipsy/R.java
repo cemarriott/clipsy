@@ -27,21 +27,25 @@ public final class R {
         public static final int no_video=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000e;
-        public static final int bCamera=0x7f080009;
-        public static final int bNewVid=0x7f08000a;
-        public static final int bt_alertdialog=0x7f08000b;
-        public static final int fc_continue=0x7f080007;
-        public static final int fc_selectVideo=0x7f080006;
-        public static final int fc_videoName=0x7f080002;
-        public static final int fc_videoPath=0x7f080004;
+        public static final int action_settings=0x7f080012;
+        public static final int bCamera=0x7f08000d;
+        public static final int bNewVid=0x7f08000e;
+        public static final int bt_alertdialog=0x7f08000f;
+        public static final int button1=0x7f080004;
+        public static final int clipButton=0x7f080005;
+        public static final int fc_continue=0x7f08000b;
+        public static final int fc_selectVideo=0x7f08000a;
+        public static final int fc_videoName=0x7f080006;
+        public static final int fc_videoPath=0x7f080008;
         public static final int pager=0x7f080000;
-        public static final int playPause=0x7f08000d;
+        public static final int playPause=0x7f080011;
         public static final int previewView=0x7f080001;
-        public static final int seekBar=0x7f08000c;
-        public static final int textView1=0x7f080005;
-        public static final int textView2=0x7f080003;
-        public static final int thumbView=0x7f080008;
+        public static final int seekBar=0x7f080010;
+        public static final int seekBar1=0x7f080002;
+        public static final int surfaceView1=0x7f080003;
+        public static final int textView1=0x7f080009;
+        public static final int textView2=0x7f080007;
+        public static final int thumbView=0x7f08000c;
     }
     public static final class layout {
         public static final int activity_audio_fragment=0x7f030000;
