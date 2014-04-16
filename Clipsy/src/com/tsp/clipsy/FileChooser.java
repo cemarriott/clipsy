@@ -74,8 +74,8 @@ public class FileChooser extends Activity {
 	      });
 		 
 		 
-		 
-		 /*    Not used here anymore, but may still be useful later.
+		 /*
+		 //    Not used here anymore, but may still be useful later.
 		 // Select Audio button
 		 selectAudio.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
@@ -98,8 +98,8 @@ public class FileChooser extends Activity {
 	            	}
 	            	
 	            }
-	      });
-	      */
+	      }); */
+	      
 		 
 		 
 		 // Continue button

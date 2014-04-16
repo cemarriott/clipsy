@@ -1,5 +1,7 @@
 package com.tsp.clipsy;
 
+import com.tsp.clipsy.audio.RingdroidSelectActivity;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

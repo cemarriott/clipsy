@@ -18,10 +18,15 @@
         android:icon="@drawable/clipsy_splash"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+        
+        
+        
+        
         <activity
             android:name="com.tsp.clipsy.Splash"
             android:label="@string/app_name"
-    		android:screenOrientation="landscape" >
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,11 +37,14 @@
             android:name="com.tsp.clipsy.MainMenu"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
+
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            -->
         </activity>
         <activity
             android:name="com.tsp.clipsy.FileChooser"
@@ -52,7 +60,7 @@
         <activity
             android:name="com.tsp.clipsy.PreviewActivity"
             android:label="@string/title_activity_preview"
-            android:parentActivityName="com.tsp.clipsy.FileChooser" 
+            android:parentActivityName="com.tsp.clipsy.FileChooser"
             android:screenOrientation="landscape" >
         </activity>
         <activity
@@ -66,6 +74,54 @@
         <activity
             android:name="com.tsp.clipsy.AudioFragment"
             android:label="@string/title_activity_audio_fragment" >
+        </activity>
+
+        
+        
+        
+        
+        <!-- Main activity that's launched when the user opens Ringdroid. -->
+        <activity
+            android:name="com.tsp.clipsy.audio.RingdroidSelectActivity"
+            android:label="@string/main_activity_label"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.OPENABLE" />
+                <data android:mimeType="audio/*" />
+            </intent-filter>
+        </activity>
+        
+
+        <!--
+         Activity for actually editing a particular audio file.
+             Controls viewing the waveform, setting the start and end
+             positions, playback, and triggering saving of the output
+             file.
+        -->
+        <activity
+            android:name="com.tsp.clipsy.audio.RingdroidEditActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize" >
+            
+            <intent-filter android:label="@string/edit_intent">
+                <action android:name="android.intent.action.EDIT" />
+                <data android:mimeType="audio/*" />
+            </intent-filter>
+        </activity>
+
+        <!-- Activity for choosing a contact to assign a ringtone to. -->
+        <activity
+            android:name="com.tsp.clipsy.audio.ChooseContactActivity"
+            android:configChanges="orientation|keyboardHidden" >
         </activity>
     </application>
 
