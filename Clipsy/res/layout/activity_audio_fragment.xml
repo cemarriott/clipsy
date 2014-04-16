@@ -13,32 +13,20 @@
         android:gravity="left" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/audioPath"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Band Name - Song Title"
-            android:textSize="12sp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5sp" />"
-
+            android:layout_marginLeft="5sp"
+            android:text="Band Name - Song Title"
+            android:textSize="12sp" />
     </LinearLayout>
-    
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:layout_centerVertical="true" >
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="There will be an interactive waveform here that allows users to select a portion of the audio."
-            android:textSize="12sp"
-            android:layout_gravity="center_vertical" />
-
-    </LinearLayout>
+    <AbsoluteLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0px"
+        android:layout_weight="1" >
+    </AbsoluteLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -47,77 +35,40 @@
         android:layout_alignParentBottom="true"
         android:gravity="center" >
 
-        <TextView
-            android:id="@+id/mark_start"
-            android:layout_width="wrap_content"
-            android:layout_height="31dip"
-            android:layout_marginLeft="10dip"
-            android:clickable="true"
-            android:gravity="center"
-            android:nextFocusUp="@+id/info"
-            android:text="Start"
-            android:textColor="#99999999"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/starttext"
-            android:layout_width="70dip"
-            android:layout_height="31dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="30dip"
-            android:contentDescription="Start"
-            android:gravity="center"
-            android:inputType="number|numberDecimal"
-            android:nextFocusLeft="@+id/zoom_out"
-            android:nextFocusRight="@+id/endtext"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/mark_end"
-            android:layout_width="wrap_content"
-            android:layout_height="31dip"
-            android:clickable="true"
-            android:gravity="center"
-            android:inputType="number|numberDecimal"
-            android:nextFocusUp="@+id/info"
-            android:text="End"
-            android:textColor="#99999999"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/endtext"
-            android:layout_width="70dip"
-            android:layout_height="31dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="50dip"
-            android:contentDescription="End"
-            android:gravity="center"
-            android:inputType="number|numberDecimal"
-            android:nextFocusLeft="@+id/starttext"
-            android:nextFocusRight="@+id/save"
-            android:textSize="16sp" />
-
-        <ImageButton
-            android:id="@+id/play"
-            style="@android:style/MediaButton"
-            android:layout_width="52dip"
-            android:layout_height="52dip"
-            android:layout_marginBottom="6dip"
-            android:layout_marginTop="6dip"
-            android:contentDescription="Play"
-            android:nextFocusUp="@+id/info"
-            android:src="@android:drawable/ic_media_play" />
-        
         <Button
-            android:id="@+id/save"
+            android:id="@+id/loadRingdroid"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dip"
-            android:text="Save"
-            android:textSize="12sp" />"
+            android:text="Ringdroid"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/playPause"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dip"
+            android:text="Play/Pause"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/loadAudio"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dip"
+            android:text="Select Audio"
+            android:textSize="12sp" />
     </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="29dp" />
 
 </RelativeLayout>

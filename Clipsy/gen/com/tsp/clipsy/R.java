@@ -23,68 +23,479 @@ public final class R {
     public static final class drawable {
         public static final int b_camera=0x7f020000;
         public static final int background=0x7f020001;
-        public static final int clipsy_logo=0x7f020002;
-        public static final int clipsy_logo_hd=0x7f020003;
-        public static final int clipsy_splash=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int no_video=0x7f020006;
+        public static final int bkgnd=0x7f020002;
+        public static final int bkgnd_normal=0x7f020003;
+        public static final int bkgnd_pressed=0x7f020004;
+        public static final int button_options=0x7f020005;
+        public static final int button_options_bkgnd=0x7f020006;
+        public static final int button_zoom_in=0x7f020007;
+        public static final int button_zoom_out=0x7f020008;
+        public static final int clipsy_logo=0x7f020009;
+        public static final int clipsy_logo_hd=0x7f02000a;
+        public static final int clipsy_splash=0x7f02000b;
+        public static final int content_save=0x7f02000c;
+        public static final int grid_line=0x7f02002a;
+        public static final int ic_action_microphone=0x7f02000d;
+        public static final int ic_action_search=0x7f02000e;
+        public static final int ic_launcher=0x7f02000f;
+        public static final int marker_left=0x7f020010;
+        public static final int marker_left_focused=0x7f020011;
+        public static final int marker_left_normal=0x7f020012;
+        public static final int marker_left_pressed=0x7f020013;
+        public static final int marker_right=0x7f020014;
+        public static final int marker_right_focused=0x7f020015;
+        public static final int marker_right_normal=0x7f020016;
+        public static final int marker_right_pressed=0x7f020017;
+        public static final int menu_about=0x7f020018;
+        public static final int menu_reset=0x7f020019;
+        public static final int menu_save=0x7f02001a;
+        public static final int menu_show_all_audio=0x7f02001b;
+        public static final int navigation_expand=0x7f02001c;
+        public static final int no_video=0x7f02001d;
+        public static final int playback_indicator=0x7f020029;
+        public static final int ringdroidlogo=0x7f02001e;
+        public static final int search=0x7f02001f;
+        public static final int selection_border=0x7f020028;
+        public static final int star=0x7f020020;
+        public static final int timecode=0x7f02002b;
+        public static final int timecode_shadow=0x7f02002c;
+        public static final int type_alarm=0x7f020021;
+        public static final int type_bkgnd_alarm=0x7f02002d;
+        public static final int type_bkgnd_music=0x7f020030;
+        public static final int type_bkgnd_notification=0x7f02002f;
+        public static final int type_bkgnd_ringtone=0x7f02002e;
+        public static final int type_bkgnd_unsupported=0x7f020031;
+        public static final int type_music=0x7f020022;
+        public static final int type_notification=0x7f020023;
+        public static final int type_ringtone=0x7f020024;
+        public static final int waveform_selected=0x7f020025;
+        public static final int waveform_unselected=0x7f020026;
+        public static final int waveform_unselected_bkgnd_overlay=0x7f020027;
     }
     public static final class id {
-        public static final int action_settings=0x7f08001e;
-        public static final int bCamera=0x7f08001a;
-        public static final int bNewVid=0x7f080019;
-        public static final int bt_alertdialog=0x7f08001b;
-        public static final int button1=0x7f080010;
-        public static final int clipButton=0x7f080011;
-        public static final int endtext=0x7f080008;
-        public static final int fc_continue=0x7f080017;
-        public static final int fc_selectVideo=0x7f080016;
-        public static final int fc_videoName=0x7f080012;
-        public static final int fc_videoPath=0x7f080014;
-        public static final int imageView1=0x7f080018;
-        public static final int info=0x7f080005;
+        public static final int action_about=0x7f080037;
+        public static final int action_privacy=0x7f08003a;
+        public static final int action_record=0x7f080039;
+        public static final int action_reset=0x7f080036;
+        public static final int action_save=0x7f080035;
+        public static final int action_search_filter=0x7f080038;
+        public static final int action_settings=0x7f080034;
+        public static final int action_show_all_audio=0x7f08003b;
+        public static final int audioPath=0x7f080001;
+        public static final int bCamera=0x7f08002d;
+        public static final int bNewVid=0x7f08002c;
+        public static final int bt_alertdialog=0x7f080033;
+        public static final int button1=0x7f08000b;
+        public static final int button_choose_contact=0x7f08000e;
+        public static final int button_do_nothing=0x7f08000f;
+        public static final int button_make_default=0x7f08000d;
+        public static final int cancel=0x7f08002a;
+        public static final int clipButton=0x7f08000c;
+        public static final int endmarker=0x7f080016;
+        public static final int endtext=0x7f08001c;
+        public static final int fc_continue=0x7f080027;
+        public static final int fc_selectVideo=0x7f080026;
+        public static final int fc_videoName=0x7f080021;
+        public static final int fc_videoPath=0x7f080023;
+        public static final int ffwd=0x7f080020;
+        public static final int filename=0x7f080029;
+        public static final int imageView1=0x7f08002b;
+        public static final int info=0x7f080017;
         public static final int linearLayout1=0x7f080000;
-        public static final int linearLayout2=0x7f080002;
-        public static final int linearLayout3=0x7f080003;
-        public static final int mark_end=0x7f080009;
-        public static final int mark_start=0x7f080004;
-        public static final int pager=0x7f08000c;
-        public static final int play=0x7f08000b;
-        public static final int playPause=0x7f08001d;
-        public static final int previewView=0x7f08000d;
-        public static final int save=0x7f08000a;
-        public static final int seekBar=0x7f08001c;
-        public static final int seekBar1=0x7f08000e;
-        public static final int starttext=0x7f080006;
-        public static final int surfaceView1=0x7f08000f;
-        public static final int textView1=0x7f080001;
-        public static final int textView2=0x7f080013;
-        public static final int thumbView=0x7f080015;
-        public static final int zoom_out=0x7f080007;
+        public static final int linearLayout3=0x7f080002;
+        public static final int loadAudio=0x7f080005;
+        public static final int loadRingdroid=0x7f080003;
+        public static final int mark_end=0x7f08001d;
+        public static final int mark_start=0x7f080019;
+        public static final int pager=0x7f080007;
+        public static final int play=0x7f080018;
+        public static final int playPause=0x7f080004;
+        public static final int previewView=0x7f080008;
+        public static final int rew=0x7f08001f;
+        public static final int ringtone_type=0x7f080028;
+        public static final int row_album=0x7f080030;
+        public static final int row_artist=0x7f08002f;
+        public static final int row_display_name=0x7f080013;
+        public static final int row_icon=0x7f08002e;
+        public static final int row_options_button=0x7f080032;
+        public static final int row_ringtone=0x7f080011;
+        public static final int row_starred=0x7f080012;
+        public static final int row_title=0x7f080031;
+        public static final int save=0x7f08001e;
+        public static final int search_filter=0x7f080010;
+        public static final int seekBar=0x7f080006;
+        public static final int seekBar1=0x7f080009;
+        public static final int startmarker=0x7f080015;
+        public static final int starttext=0x7f08001a;
+        public static final int surfaceView1=0x7f08000a;
+        public static final int textView1=0x7f080024;
+        public static final int textView2=0x7f080022;
+        public static final int thumbView=0x7f080025;
+        public static final int waveform=0x7f080014;
+        public static final int zoom_out=0x7f08001b;
     }
     public static final class layout {
         public static final int activity_audio_fragment=0x7f030000;
         public static final int activity_preview=0x7f030001;
         public static final int activity_preview_fragment=0x7f030002;
         public static final int activity_video_fragment=0x7f030003;
-        public static final int file_chooser=0x7f030004;
-        public static final int main_menu=0x7f030005;
-        public static final int new_project=0x7f030006;
-        public static final int splash=0x7f030007;
-        public static final int viewer=0x7f030008;
+        public static final int after_save_action=0x7f030004;
+        public static final int choose_contact=0x7f030005;
+        public static final int contact_row=0x7f030006;
+        public static final int editor=0x7f030007;
+        public static final int file_chooser=0x7f030008;
+        public static final int file_save=0x7f030009;
+        public static final int main_menu=0x7f03000a;
+        public static final int media_select=0x7f03000b;
+        public static final int media_select_row=0x7f03000c;
+        public static final int new_project=0x7f03000d;
+        public static final int splash=0x7f03000e;
+        public static final int viewer=0x7f03000f;
     }
     public static final class menu {
         public static final int audio=0x7f070000;
-        public static final int file_chooser=0x7f070001;
-        public static final int main=0x7f070002;
-        public static final int preview=0x7f070003;
-        public static final int video=0x7f070004;
+        public static final int edit_options=0x7f070001;
+        public static final int file_chooser=0x7f070002;
+        public static final int main=0x7f070003;
+        public static final int preview=0x7f070004;
+        public static final int select_options=0x7f070005;
+        public static final int video=0x7f070006;
     }
     public static final class string {
+        public static final int about_text=0x7f050063;
+        /** 
+     About
+     
+
+     About
+     
+      About      
+
+     Acerca de
+     
+
+     About
+     
+      About      
+
+     About
+     
+
+     About
+     
+      About      
+      About      
+         */
+        public static final int about_title=0x7f050062;
         public static final int action_settings=0x7f050001;
+        public static final int alert_no_button=0x7f05004c;
+        public static final int alert_ok_button=0x7f05004a;
+        public static final int alert_title_failure=0x7f050049;
+        /** 
+     Success and error messages
+     
+
+     Success and error messages
+     
+      Success and error messages      
+
+     Mensajes de exito y error
+     
+
+     Success and error messages
+     
+      Success and error messages      
+
+     Success and error messages
+     
+
+     Success and error messages
+     
+      Success and error messages      
+      Success and error messages      
+         */
+        public static final int alert_title_success=0x7f050048;
+        public static final int alert_yes_button=0x7f05004b;
         public static final int app_name=0x7f050000;
+        public static final int artist_name=0x7f05003d;
+        public static final int bad_extension_error=0x7f050058;
+        public static final int button_options=0x7f050014;
+        public static final int button_start_record_activity=0x7f050010;
+        public static final int choose_contact_ringtone_button=0x7f05001c;
+        /** 
+     Choose Contact Activity
+     
+
+     Choose Contact Activity
+     
+      Choose Contact Activity      
+
+     Elegir actividad de contacto
+     
+
+     Choose Contact Activity
+     
+      Choose Contact Activity      
+
+     Choose Contact Activity
+     
+
+     Choose Contact Activity
+     
+      Choose Contact Activity      
+      Choose Contact Activity      
+         */
+        public static final int choose_contact_title=0x7f05005a;
+        public static final int confirm_delete_non_ringdroid=0x7f050044;
+        public static final int confirm_delete_ringdroid=0x7f050043;
+        public static final int context_menu_contact=0x7f050031;
+        public static final int context_menu_default_notification=0x7f050032;
+        public static final int context_menu_default_ringtone=0x7f050030;
+        public static final int context_menu_delete=0x7f05002f;
+        /** 
+     Context menu items
+     
+
+     Context menu items
+     
+      Context menu items      
+
+     Elementos del menu de contexto
+     
+
+     Context menu items
+     
+      Context menu items      
+
+     Context menu items
+     
+
+     Context menu items
+     
+      Context menu items      
+      Context menu items      
+         */
+        public static final int context_menu_edit=0x7f05002e;
+        public static final int default_notification_success_message=0x7f05004f;
+        public static final int default_ringtone_success_message=0x7f05004e;
+        public static final int delete_alarm=0x7f05003f;
+        public static final int delete_audio=0x7f050042;
+        public static final int delete_cancel_button=0x7f050046;
+        public static final int delete_failed=0x7f050047;
+        public static final int delete_music=0x7f050041;
+        public static final int delete_notification=0x7f050040;
+        public static final int delete_ok_button=0x7f050045;
+        /** 
+     Delete confirmation dialog
+     
+
+     Delete confirmation dialog
+     
+      Delete confirmation dialog      
+
+     Cuadro confirmacion eliminacion
+     
+
+     Delete confirmation dialog
+     
+      Delete confirmation dialog      
+
+     Delete confirmation dialog
+     
+
+     Delete confirmation dialog
+     
+      Delete confirmation dialog      
+      Delete confirmation dialog      
+         */
+        public static final int delete_ringtone=0x7f05003e;
+        public static final int delete_tmp_error=0x7f050052;
+        public static final int do_nothing_with_ringtone_button=0x7f05001d;
+        public static final int edit_intent=0x7f050017;
+        public static final int end_label=0x7f050016;
+        public static final int end_marker=0x7f050021;
+        public static final int error_server_prompt=0x7f050061;
+        public static final int ffwd=0x7f050025;
+        public static final int file_save_button_cancel=0x7f050035;
+        public static final int file_save_button_save=0x7f050034;
+        /** 
+     File Save dialog
+     
+
+     File Save dialog
+     
+      File Save dialog      
+
+     Cuadro Guardar archivo
+     
+
+     File Save dialog
+     
+      File Save dialog      
+
+     File Save dialog
+     
+
+     File Save dialog
+     
+      File Save dialog      
+      File Save dialog      
+         */
+        public static final int file_save_title=0x7f050033;
         public static final int hello_world=0x7f050002;
+        /** 
+     Main / media select activity
+     
+
+     Main / media select activity
+     
+      Main / media select activity      
+
+     Actividad principal/seleccion multimedia
+     
+
+     Main / media select activity
+     
+      Main / media select activity      
+
+     Main / media select activity
+     
+
+     Main / media select activity
+     
+      Main / media select activity      
+      Main / media select activity      
+         */
+        public static final int main_activity_label=0x7f05000e;
+        public static final int make_default_ringtone_button=0x7f05001b;
+        public static final int menu_about=0x7f05002b;
+        public static final int menu_privacy=0x7f05002c;
+        public static final int menu_reset=0x7f05002a;
+        /** 
+     Menu items
+     
+
+     Menu items
+     
+      Menu items      
+
+     Elementos de menu
+     
+
+     Menu items
+     
+      Menu items      
+
+     Menu items
+     
+
+     Menu items
+     
+      Menu items      
+      Menu items      
+         */
+        public static final int menu_save=0x7f050029;
+        public static final int menu_show_all_audio=0x7f05002d;
+        public static final int no_extension_error=0x7f050059;
+        public static final int no_sdcard=0x7f050012;
+        public static final int no_space_error=0x7f050057;
+        public static final int no_unique_filename=0x7f050051;
+        public static final int play=0x7f050023;
+        public static final int play_error=0x7f050050;
         public static final int play_pause=0x7f050004;
+        /**  Progress dialog text for loading or saving... 
+ Progress dialog text for loading or saving... 
+ Progress dialog text for loading or saving... 
+ Cuadro de progreso de carga o guardado... 
+ Progress dialog text for loading or saving... 
+ Progress dialog text for loading or saving... 
+ Progress dialog while loading a sound 
+ Progress dialog text for loading or saving... 
+ Progress dialog text for loading or saving... 
+ Progress dialog text for loading or saving... 
+         */
+        public static final int progress_dialog_loading=0x7f05001e;
+        public static final int progress_dialog_saving=0x7f05001f;
+        public static final int read_error=0x7f050056;
+        public static final int record_error=0x7f050053;
+        public static final int rewind=0x7f050022;
+        public static final int ringdroid_app_name=0x7f05000d;
+        public static final int ringtone_name_label=0x7f05003c;
+        public static final int ringtone_type_label=0x7f050036;
+        public static final int save_button=0x7f050028;
+        public static final int save_success_message=0x7f05004d;
+        public static final int sdcard_readonly=0x7f050011;
+        public static final int sdcard_shared=0x7f050013;
+        public static final int search_edit_box=0x7f05000f;
+        public static final int server_later=0x7f05005f;
+        public static final int server_never=0x7f050060;
+        public static final int server_prompt=0x7f05005d;
+        /** 
+     Sending information to server
+     
+
+     Sending information to server
+     
+      Sending information to server      
+
+     Enviando informacion a servidor
+     
+
+     Sending information to server
+     
+      Sending information to server      
+
+     Sending information to server
+     
+
+     Sending information to server
+     
+      Sending information to server      
+      Sending information to server      
+         */
+        public static final int server_title=0x7f05005c;
+        public static final int server_yes=0x7f05005e;
+        public static final int set_default_notification=0x7f05001a;
+        /** 
+     Edit activity
+     
+ Labels next to the start and end time edit boxes 
+
+     Edit activity
+     
+ Labels next to the start and end time edit boxes 
+      Edit activity      
+ Labels next to the start and end time edit boxes 
+
+     Editar actividad
+     
+ Etiquetas junto a los cuadros de hora de inicio y fin 
+
+     Edit activity
+     
+ Labels next to the start and end time edit boxes 
+      Edit activity      
+ Labels next to the start and end time edit boxes 
+
+     Edit activity
+     
+ Labels next to the start and end time edit boxes 
+
+     Edit activity
+     
+ Labels next to the start and end time edit boxes 
+      Edit activity      
+ Labels next to the start and end time edit boxes 
+      Edit activity      
+ Labels next to the start and end time edit boxes 
+         */
+        public static final int start_label=0x7f050015;
+        /**  Image button descriptions for accessibility 
+         */
+        public static final int start_marker=0x7f050020;
+        public static final int stop=0x7f050024;
+        public static final int success_contact_ringtone=0x7f05005b;
+        public static final int time_seconds=0x7f050018;
         public static final int title_activity_audio_fragment=0x7f05000c;
         public static final int title_activity_file_chooser=0x7f050003;
         public static final int title_activity_preview=0x7f050006;
@@ -94,6 +505,32 @@ public final class R {
         public static final int title_section1=0x7f050007;
         public static final int title_section2=0x7f050008;
         public static final int title_section3=0x7f050009;
+        public static final int too_small_error=0x7f050054;
+        public static final int type_alarm=0x7f050038;
+        public static final int type_clipsy=0x7f05003b;
+        public static final int type_music=0x7f050037;
+        public static final int type_notification=0x7f050039;
+        public static final int type_ringtone=0x7f05003a;
+        /**  After you save a notification or ringtone and have more options
+         for what to do with them 
+ After you save a notification or ringtone and have more options
+	 for what to do with them 
+ After you save a notification or ringtone and have more options 	 for what to do with them 
+ Una vez guardada una notificacion o un tono de llamada y tienes mas opciones de configuracion
+ After you save a notification or ringtone and have more options
+	 for what to do with them 
+ After you save a notification or ringtone and have more options 	 for what to do with them 
+ After you save a notification or ringtone and have more options
+	 for what to do with them 
+ After you save a notification or ringtone and have more options
+	 for what to do with them 
+ After you save a notification or ringtone and have more options 	 for what to do with them 
+ After you save a notification or ringtone and have more options 	 for what to do with them 
+         */
+        public static final int what_to_do_with_ringtone=0x7f050019;
+        public static final int write_error=0x7f050055;
+        public static final int zoom_in=0x7f050026;
+        public static final int zoom_out=0x7f050027;
     }
     public static final class style {
         /** 
@@ -122,5 +559,13 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
+        public static final int AudioFileInfoOverlayText=0x7f060002;
+        public static final int ChooseContactBackground=0x7f060004;
+        public static final int HorizontalDividerBottom=0x7f060009;
+        public static final int HorizontalDividerTop=0x7f060008;
+        public static final int ToolbarBackground=0x7f060003;
+        public static final int VerticalDividerForList=0x7f060005;
+        public static final int VerticalDividerLeft=0x7f060006;
+        public static final int VerticalDividerRight=0x7f060007;
     }
 }
