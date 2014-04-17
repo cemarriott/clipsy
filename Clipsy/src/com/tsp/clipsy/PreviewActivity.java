@@ -1,9 +1,6 @@
 package com.tsp.clipsy;
 
 import java.util.Locale;
-
-import com.tsp.clipsy.audio.RingdroidSelectActivity;
-
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;

@@ -3,8 +3,6 @@ package com.tsp.clipsy;
 import java.io.File;
 import java.io.IOException;
 
-import com.tsp.clipsy.audio.RingdroidSelectActivity;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

@@ -69,21 +69,6 @@
             android:label="@string/title_activity_audio_fragment" >
         </activity>
         
-        
-        <!-- Main activity that's launched when the user opens Ringdroid. -->
-        <activity
-            android:name=".audio.RingdroidSelectActivity"
-            android:label="@string/main_activity_label"
-            android:screenOrientation="landscape" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.GET_CONTENT" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.OPENABLE" />
-                <data android:mimeType="audio/*" />
-            </intent-filter>
-        </activity>
-        
 
         <!--
          Activity for actually editing a particular audio file.
@@ -104,12 +89,6 @@
                 <action android:name="android.intent.action.EDIT" />
                 <data android:mimeType="audio/*" />
             </intent-filter>
-        </activity>
-
-        <!-- Activity for choosing a contact to assign a ringtone to. -->
-        <activity
-            android:name=".audio.ChooseContactActivity"
-            android:configChanges="orientation|keyboardHidden" >
         </activity>
     </application>
 </manifest>
