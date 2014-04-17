@@ -221,7 +221,7 @@ WaveformView.WaveformListener
 		Intent intent = getIntent();
 
 		if (intent.getBooleanExtra("privacy", false)) {
-			showServerPrompt(true);
+			finish();
 			return;
 		}
 
@@ -292,7 +292,7 @@ WaveformView.WaveformListener
 			// The user finished saving their ringtone and they're
 			// just applying it to a contact.  When they return here,
 			// they're done.
-			sendStatsToServerIfAllowedAndFinish();
+			finish();
 			return;
 		}
 
@@ -1179,22 +1179,7 @@ WaveformView.WaveformListener
 	 }
 
 	 private String makeRingtoneFilename(CharSequence title, String extension) {
-		 String parentdir;
-		 switch(mNewFileKind) {
-		 default:
-		 case FileSaveDialog.FILE_KIND_MUSIC:
-			 parentdir = "/sdcard/media/audio/music";
-			 break;
-		 case FileSaveDialog.FILE_KIND_ALARM:
-			 parentdir = "/sdcard/media/audio/alarms";
-			 break;
-		 case FileSaveDialog.FILE_KIND_NOTIFICATION:
-			 parentdir = "/sdcard/media/audio/notifications";
-			 break;
-		 case FileSaveDialog.FILE_KIND_RINGTONE:
-			 parentdir = "/sdcard/media/audio/ringtones";
-			 break;
-		 }
+		 String parentdir = "/sdcard/media/audio/clipsy";
 
 		 // Create the parent directory
 		 File parentDirFile = new File(parentdir);
@@ -1356,14 +1341,10 @@ WaveformView.WaveformListener
 		 values.put(MediaStore.Audio.Media.ARTIST, artist);
 		 values.put(MediaStore.Audio.Media.DURATION, duration);
 
-		 values.put(MediaStore.Audio.Media.IS_RINGTONE,
-				 mNewFileKind == FileSaveDialog.FILE_KIND_RINGTONE);
-		 values.put(MediaStore.Audio.Media.IS_NOTIFICATION,
-				 mNewFileKind == FileSaveDialog.FILE_KIND_NOTIFICATION);
-		 values.put(MediaStore.Audio.Media.IS_ALARM,
-				 mNewFileKind == FileSaveDialog.FILE_KIND_ALARM);
-		 values.put(MediaStore.Audio.Media.IS_MUSIC,
-				 mNewFileKind == FileSaveDialog.FILE_KIND_MUSIC);
+		 values.put(MediaStore.Audio.Media.IS_RINGTONE, false);
+		 values.put(MediaStore.Audio.Media.IS_NOTIFICATION, false);
+		 values.put(MediaStore.Audio.Media.IS_ALARM, false);
+		 values.put(MediaStore.Audio.Media.IS_MUSIC, true);
 
 		 // Insert it into the database
 		 Uri uri = MediaStore.Audio.Media.getContentUriForPath(outPath);
@@ -1380,98 +1361,12 @@ WaveformView.WaveformListener
 
 		 // If Ringdroid was launched to get content, just return
 		 if (mWasGetContentIntent) {
-			 sendStatsToServerIfAllowedAndFinish();
+			 finish();
 			 return;
 		 }
 
-		 // There's nothing more to do with music or an alarm.  Show a
-		 // success message and then quit.
-		 if (mNewFileKind == FileSaveDialog.FILE_KIND_MUSIC ||
-				 mNewFileKind == FileSaveDialog.FILE_KIND_ALARM) {
-			 Toast.makeText(this,
-					 R.string.save_success_message,
-					 Toast.LENGTH_SHORT)
-					 .show();
-			 sendStatsToServerIfAllowedAndFinish();
+			 Toast.makeText(this, R.string.save_success_message, Toast.LENGTH_SHORT).show();
 			 return;
-		 }
-
-		 // If it's a notification, give the user the option of making
-		 // this their default notification.  If they say no, we're finished.
-		 if (mNewFileKind == FileSaveDialog.FILE_KIND_NOTIFICATION) {
-			 new AlertDialog.Builder(RingdroidEditActivity.this)
-			 .setTitle(R.string.alert_title_success)
-			 .setMessage(R.string.set_default_notification)
-			 .setPositiveButton(R.string.alert_yes_button,
-					 new DialogInterface.OnClickListener() {
-				 public void onClick(DialogInterface dialog,
-						 int whichButton) {
-					 RingtoneManager.setActualDefaultRingtoneUri(
-							 RingdroidEditActivity.this,
-							 RingtoneManager.TYPE_NOTIFICATION,
-							 newUri);
-					 sendStatsToServerIfAllowedAndFinish();
-				 }
-			 })
-			 .setNegativeButton(
-					 R.string.alert_no_button,
-					 new DialogInterface.OnClickListener() {
-						 public void onClick(DialogInterface dialog,
-								 int whichButton) {
-							 sendStatsToServerIfAllowedAndFinish();
-						 }
-					 })
-					 .setCancelable(false)
-					 .show();
-			 return;
-		 }
-
-		 // If we get here, that means the type is a ringtone.  There are
-		 // three choices: make this your default ringtone, assign it to a
-		 // contact, or do nothing.
-
-		 final Handler handler = new Handler() {
-			 public void handleMessage(Message response) {
-				 int actionId = response.arg1;
-				 switch (actionId) {
-				 case R.id.button_make_default:
-					 RingtoneManager.setActualDefaultRingtoneUri(
-							 RingdroidEditActivity.this,
-							 RingtoneManager.TYPE_RINGTONE,
-							 newUri);
-					 Toast.makeText(
-							 RingdroidEditActivity.this,
-							 R.string.default_ringtone_success_message,
-							 Toast.LENGTH_SHORT)
-							 .show();
-					 sendStatsToServerIfAllowedAndFinish();
-					 break;
-				 case R.id.button_choose_contact:
-					 chooseContactForRingtone(newUri);
-					 break;
-				 default:
-				 case R.id.button_do_nothing:
-					 sendStatsToServerIfAllowedAndFinish();
-					 break;
-				 }
-			 }
-		 };
-		 Message message = Message.obtain(handler);
-		 AfterSaveActionDialog dlog = new AfterSaveActionDialog(
-				 this, message);
-		 dlog.show();
-	 }
-
-	 private void chooseContactForRingtone(Uri uri) {
-		 try {
-			 Intent intent = new Intent(Intent.ACTION_EDIT, uri);
-			 intent.setClassName(
-					 "com.ringdroid",
-					 "com.ringdroid.ChooseContactActivity");
-			 startActivityForResult(intent, REQUEST_CODE_CHOOSE_CONTACT);
-		 } catch (Exception e) {
-			 Log.e("Ringdroid", "Couldn't open Choose Contact window");
-		 }
 	 }
 
 	 private void handleFatalError(
@@ -1510,8 +1405,7 @@ WaveformView.WaveformListener
 					 new DialogInterface.OnClickListener() {
 						 public void onClick(DialogInterface dialog,
 								 int whichButton) {
-							 sendErrToServerAndFinish(errorInternalName,
-									 exception);
+							 finish();
 							 return;
 						 }
 					 })
@@ -1549,8 +1443,8 @@ WaveformView.WaveformListener
 						 prefsEditor.putInt(PREF_ERR_SERVER_ALLOWED,
 								 SERVER_ALLOWED_YES);
 						 prefsEditor.commit();
-						 sendErrToServerAndFinish(errorInternalName,
-								 exception);
+						 finish();
+						 return;
 					 }
 				 })
 				 .setNeutralButton(
@@ -1595,7 +1489,6 @@ WaveformView.WaveformListener
 		 final Handler handler = new Handler() {
 			 public void handleMessage(Message response) {
 				 CharSequence newTitle = (CharSequence)response.obj;
-				 mNewFileKind = response.arg1;
 				 saveRingtone(newTitle);
 			 }
 		 };
@@ -1725,315 +1618,5 @@ WaveformView.WaveformListener
 				 MediaStore.Audio.Media.DATA);
 
 		 return c.getString(dataIndex);
-	 }
-
-	 private void sendStatsToServerIfAllowedAndFinish() {
-		 Log.i("Ringdroid", "sendStatsToServerIfAllowedAndFinish");
-
-		 final SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
-
-		 // Check if we already have a pref for whether or not we can
-		 // contact the server.
-		 int serverAllowed = prefs.getInt(PREF_STATS_SERVER_ALLOWED,
-				 SERVER_ALLOWED_UNKNOWN);
-				 if (serverAllowed == SERVER_ALLOWED_NO) {
-					 Log.i("Ringdroid", "SERVER_ALLOWED_NO");
-					 finish();
-					 return;
-				 }
-
-				 if (serverAllowed == SERVER_ALLOWED_YES) {
-					 Log.i("Ringdroid", "SERVER_ALLOWED_YES");
-					 sendStatsToServerAndFinish();
-					 return;
-				 }
-
-				 // Number of times the user has successfully saved a sound.
-				 int successCount = prefs.getInt(PREF_SUCCESS_COUNT, 0);
-
-				 // The number of times the user must have successfully saved
-				 // a sound before we'll ask them.  Defaults to 2, and doubles
-				 // each time they click "Later".
-				 final int allowServerCheckIndex =
-						 prefs.getInt(PREF_STATS_SERVER_CHECK, 2);
-				 if (successCount < allowServerCheckIndex) {
-					 Log.i("Ringdroid", "successCount " + successCount +
-							 " is less than " + allowServerCheckIndex);
-					 finish();
-					 return;
-				 }
-
-				 showServerPrompt(false);
-	 }
-
-	 void showServerPrompt(final boolean userInitiated) {
-		 final SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
-
-		 final SpannableString message = new SpannableString(
-				 getResources().getText(R.string.server_prompt));
-		 Linkify.addLinks(message, Linkify.ALL);
-
-		 final AlertDialog dialog = new AlertDialog.Builder(RingdroidEditActivity.this)
-		 .setTitle(R.string.server_title)
-		 .setMessage(message)
-		 .setPositiveButton(
-				 R.string.server_yes,
-				 new DialogInterface.OnClickListener() {
-					 public void onClick(DialogInterface dialog,
-							 int whichButton) {
-						 SharedPreferences.Editor prefsEditor = prefs.edit();
-						 prefsEditor.putInt(PREF_STATS_SERVER_ALLOWED,
-								 SERVER_ALLOWED_YES);
-						 prefsEditor.commit();
-						 if (userInitiated) {
-							 finish();
-						 } else {
-							 sendStatsToServerAndFinish();
-						 }
-					 }
-				 })
-				 .setNeutralButton(
-						 R.string.server_later,
-						 new DialogInterface.OnClickListener() {
-							 public void onClick(DialogInterface dialog,
-									 int whichButton) {
-								 int allowServerCheckIndex =
-										 prefs.getInt(PREF_STATS_SERVER_CHECK, 2);
-								 int successCount = prefs.getInt(PREF_SUCCESS_COUNT, 0);
-								 SharedPreferences.Editor prefsEditor = prefs.edit();
-								 if (userInitiated) {
-									 prefsEditor.putInt(PREF_STATS_SERVER_CHECK,
-											 successCount + 2);
-
-								 } else {
-									 prefsEditor.putInt(PREF_STATS_SERVER_CHECK,
-											 allowServerCheckIndex * 2);
-								 }
-								 prefsEditor.commit();
-								 finish();
-							 }
-						 })
-						 .setNegativeButton(
-								 R.string.server_never,
-								 new DialogInterface.OnClickListener() {
-									 public void onClick(DialogInterface dialog,
-											 int whichButton) {
-										 SharedPreferences.Editor prefsEditor = prefs.edit();
-										 prefsEditor.putInt(PREF_STATS_SERVER_ALLOWED,
-												 SERVER_ALLOWED_NO);
-										 if (userInitiated) {
-											 // If the user initiated, err on the safe side and disable
-											 // sending crash reports too. There's no way to turn them
-											 // back on now aside from clearing data from this app, but
-											 // it doesn't matter, we don't need error reports from every
-											 // user ever.
-											 prefsEditor.putInt(PREF_ERR_SERVER_ALLOWED,
-													 SERVER_ALLOWED_NO);
-										 }
-										 prefsEditor.commit();
-										 finish();
-									 }
-								 })
-								 .setCancelable(false)
-								 .show();
-
-		 // Make links clicky
-		 ((TextView)dialog.findViewById(android.R.id.message))
-		 .setMovementMethod(LinkMovementMethod.getInstance());
-	 }
-
-	 void sendStatsToServerAndFinish() {
-		 Log.i("Ringdroid", "sendStatsToServerAndFinish");
-		 new Thread() {
-			 public void run() { 
-				 sendToServer(STATS_SERVER_URL, null, null);
-			 } 
-		 }.start();
-		 Log.i("Ringdroid", "sendStatsToServerAndFinish calling finish");
-		 finish();
-	 }
-
-	 void sendErrToServerAndFinish(final CharSequence errType,
-			 final Exception exception) {
-		 Log.i("Ringdroid", "sendErrToServerAndFinish");
-		 new Thread() {
-			 public void run() { 
-				 sendToServer(ERR_SERVER_URL, errType, exception);
-			 } 
-		 }.start();
-		 Log.i("Ringdroid", "sendErrToServerAndFinish calling finish");
-		 finish();
-	 }
-
-	 /**
-	  * Nothing nefarious about this; the purpose is just to
-	  * uniquely identify each user so we don't double-count the same
-	  * ringtone - without actually identifying the actual user.
-	  */
-	 long getUniqueId() {
-		 SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
-		 long uniqueId = prefs.getLong(PREF_UNIQUE_ID, 0);
-		 if (uniqueId == 0) {
-			 uniqueId = new Random().nextLong();
-
-			 SharedPreferences.Editor prefsEditor = prefs.edit();
-			 prefsEditor.putLong(PREF_UNIQUE_ID, uniqueId);
-			 prefsEditor.commit();
-		 }
-
-		 return uniqueId;
-	 }
-
-	 /**
-	  * If the exception is not null, will send the stack trace.
-	  */
-	 void sendToServer(String serverUrl,
-			 CharSequence errType,
-			 Exception exception) {
-		 if (mTitle == null)
-			 return;
-
-		 Log.i("Ringdroid", "sendStatsToServer");
-
-		 boolean isSuccess = (exception == null);
-
-		 StringBuilder postMessage = new StringBuilder();
-		 String ringdroidVersion = "unknown";
-		 try {
-			 ringdroidVersion =
-					 getPackageManager().getPackageInfo(getPackageName(), -1)
-					 .versionName;
-		 } catch (android.content.pm.PackageManager.NameNotFoundException e) {
-		 }
-		 postMessage.append("ringdroid_version=");
-		 postMessage.append(URLEncoder.encode(ringdroidVersion));
-
-		 postMessage.append("&android_version=");
-		 postMessage.append(URLEncoder.encode(Build.VERSION.RELEASE));
-
-		 postMessage.append("&unique_id=");
-		 postMessage.append(getUniqueId());
-
-		 postMessage.append("&accurate_seek=");
-		 postMessage.append(mCanSeekAccurately);
-
-		 if (isSuccess) {
-			 postMessage.append("&title=");
-			 postMessage.append(URLEncoder.encode(mTitle));
-			 if (mArtist != null) {
-				 postMessage.append("&artist=");
-				 postMessage.append(URLEncoder.encode(mArtist));
-			 }
-			 if (mAlbum != null) {
-				 postMessage.append("&album=");
-				 postMessage.append(URLEncoder.encode(mAlbum));
-			 }
-			 if (mGenre != null) {
-				 postMessage.append("&genre=");
-				 postMessage.append(URLEncoder.encode(mGenre));
-			 }
-			 postMessage.append("&year=");
-			 postMessage.append(mYear);
-
-			 postMessage.append("&filename=");
-			 postMessage.append(URLEncoder.encode(mFilename));
-
-			 // The user's real location is not actually sent, this is just
-			 // vestigial code from an old experiment.
-			 double latitude = 0.0;
-			 double longitude = 0.0;
-			 postMessage.append("&user_lat=");
-			 postMessage.append(URLEncoder.encode("" + latitude));
-			 postMessage.append("&user_lon=");
-			 postMessage.append(URLEncoder.encode("" + longitude));
-
-			 SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
-			 int successCount = prefs.getInt(PREF_SUCCESS_COUNT, 0);
-			 postMessage.append("&success_count=");
-			 postMessage.append(URLEncoder.encode("" + successCount));
-
-			 postMessage.append("&bitrate=");
-			 postMessage.append(URLEncoder.encode(
-					 "" + mSoundFile.getAvgBitrateKbps()));
-
-			 postMessage.append("&channels=");
-			 postMessage.append(URLEncoder.encode(
-					 "" + mSoundFile.getChannels()));
-
-			 String md5;
-			 try {
-				 md5 = mSoundFile.computeMd5OfFirst10Frames();
-			 } catch (Exception e) {
-				 md5 = "";
-			 }
-			 postMessage.append("&md5=");
-			 postMessage.append(URLEncoder.encode(md5));
-
-		 } else {
-			 // Error case
-
-			 postMessage.append("&err_type=");
-			 postMessage.append(errType);
-			 postMessage.append("&err_str=");
-			 postMessage.append(URLEncoder.encode(getStackTrace(exception)));
-
-			 postMessage.append("&src_filename=");
-			 postMessage.append(URLEncoder.encode(mFilename));
-
-			 if (mDstFilename != null) {
-				 postMessage.append("&dst_filename=");
-				 postMessage.append(URLEncoder.encode(mDstFilename));
-			 }
-		 }
-
-		 if (mSoundFile != null) {
-			 double framesToSecs = 0.0;
-			 double sampleRate = mSoundFile.getSampleRate();
-			 if (sampleRate > 0.0) {
-				 framesToSecs = mSoundFile.getSamplesPerFrame()
-						 * 1.0 / sampleRate;
-			 }
-
-			 double songLen = framesToSecs * mSoundFile.getNumFrames();
-			 postMessage.append("&songlen=");
-			 postMessage.append(URLEncoder.encode("" + songLen));
-
-			 postMessage.append("&sound_type=");
-			 postMessage.append(URLEncoder.encode(mSoundFile.getFiletype()));
-
-			 double clipStart = mStartPos * framesToSecs;
-			 double clipLen = (mEndPos - mStartPos) * framesToSecs;
-			 postMessage.append("&clip_start=");
-			 postMessage.append(URLEncoder.encode("" + clipStart));
-			 postMessage.append("&clip_len=");
-			 postMessage.append(URLEncoder.encode("" + clipLen));
-		 }
-
-		 String fileKindName = FileSaveDialog.KindToName(mNewFileKind);
-		 postMessage.append("&clip_kind=");
-		 postMessage.append(URLEncoder.encode(fileKindName));
-
-		 Log.i("Ringdroid", postMessage.toString());
-
-		 try {
-			 int TIMEOUT_MILLISEC = 10000;  // = 10 seconds
-			 HttpParams httpParams = new BasicHttpParams();
-			 HttpConnectionParams.setConnectionTimeout(httpParams,
-					 TIMEOUT_MILLISEC);
-			 HttpConnectionParams.setSoTimeout(httpParams, TIMEOUT_MILLISEC);
-			 HttpClient client = new DefaultHttpClient(httpParams);
-
-			 HttpPost request = new HttpPost(serverUrl);
-			 request.setEntity(new ByteArrayEntity(
-					 postMessage.toString().getBytes("UTF8")));
-
-			 Log.i("Ringdroid", "Executing request");
-			 HttpResponse response = client.execute(request);
-
-			 Log.i("Ringdroid", "Response: " + response.toString());
-
-		 } catch (Exception e) {
-			 e.printStackTrace();
-		 }
 	 }
 }

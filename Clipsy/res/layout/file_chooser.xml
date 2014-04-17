@@ -27,13 +27,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView2"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/textView1"
+        android:layout_toRightOf="@+id/save_text"
         android:maxWidth="150dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:width="150dp" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/save_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -45,8 +45,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/save_text"
+        android:layout_below="@+id/save_text"
         android:paddingBottom="5dp"
         android:text="Filename:"
         android:textAppearance="?android:attr/textAppearanceSmall" />
