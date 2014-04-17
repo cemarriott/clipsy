@@ -27,7 +27,7 @@
        android:layout_height="0px"
        android:layout_weight="1">
 
-      <com.ringdroid.WaveformView android:id="@+id/waveform"
+      <com.tsp.clipsy.audio.WaveformView android:id="@+id/waveform"
        android:layout_width="fill_parent"
        android:layout_height="fill_parent" />
 

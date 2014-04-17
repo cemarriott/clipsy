@@ -612,7 +612,7 @@ WaveformView.WaveformListener
 	  */
 	 private void loadGui() {
 		 // Inflate our UI from its XML layout description.
-		 setContentView(R.layout.activity_audio_fragment);
+		 setContentView(R.layout.editor);
 
 		 DisplayMetrics metrics = new DisplayMetrics();
 		 getWindowManager().getDefaultDisplay().getMetrics(metrics);

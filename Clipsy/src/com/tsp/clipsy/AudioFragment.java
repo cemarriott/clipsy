@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ public class AudioFragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 	private Handler mHandler = new Handler();
 	private int songLength;
 	private final int SEEK_MAX = 1000;
+	private boolean mWasGetContentIntent;
 
 	private String selectedAudioPath;
 
@@ -90,9 +92,18 @@ public class AudioFragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 		loadRingdroid.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 
+				/*
 				Intent openAudio = new Intent(getActivity(), RingdroidSelectActivity.class);
 				openAudio.setAction("android.intent.action.GET_CONTENT");
 				startActivity(openAudio);
+				*/
+				
+		        String filename = selectedAudioPath;
+
+	            Intent intent = new Intent(Intent.ACTION_EDIT, Uri.parse(filename));
+	            intent.putExtra("was_get_content_intent", mWasGetContentIntent);
+	            intent.setClassName("com.tsp.clipsy", "com.tsp.clipsy.audio.RingdroidEditActivity");
+	            startActivityForResult(intent, 1);
 
 			}
 		});

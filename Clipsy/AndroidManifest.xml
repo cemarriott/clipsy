@@ -71,7 +71,7 @@
         
         <!-- Main activity that's launched when the user opens Ringdroid. -->
         <activity
-            android:name="com.tsp.clipsy.audio.RingdroidSelectActivity"
+            android:name=".audio.RingdroidSelectActivity"
             android:label="@string/main_activity_label"
             android:screenOrientation="landscape" >
 
@@ -93,7 +93,8 @@
 
         -->
         <activity
-            android:name="com.tsp.clipsy.audio.RingdroidEditActivity"
+            android:name=".audio.RingdroidEditActivity"
+            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize" >
@@ -106,7 +107,7 @@
 
         <!-- Activity for choosing a contact to assign a ringtone to. -->
         <activity
-            android:name="com.tsp.clipsy.audio.ChooseContactActivity"
+            android:name=".audio.ChooseContactActivity"
             android:configChanges="orientation|keyboardHidden" >
         </activity>
     </application>
