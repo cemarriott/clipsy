@@ -1313,17 +1313,6 @@ WaveformView.WaveformListener
 			 String outPath,
 			 File outFile,
 			 int duration) {
-		 long length = outFile.length();
-		 if (length <= 512) {
-			 outFile.delete();
-			 new AlertDialog.Builder(this)
-			 .setTitle(R.string.alert_title_failure)
-			 .setMessage(R.string.too_small_error)
-			 .setPositiveButton(R.string.alert_ok_button, null)
-			 .setCancelable(false)
-			 .show();
-			 return;
-		 }
 
 		 // Create the database record, pointing to the existing file path
 
@@ -1358,15 +1347,16 @@ WaveformView.WaveformListener
 		 SharedPreferences.Editor prefsEditor = prefs.edit();
 		 prefsEditor.putInt(PREF_SUCCESS_COUNT, successCount + 1);
 		 prefsEditor.commit();
+		 
+		 
+		 Intent output = new Intent();
+		 output.putExtra("path", outPath);
+		 setResult(Activity.RESULT_OK, output);
 
-		 // If Ringdroid was launched to get content, just return
-		 if (mWasGetContentIntent) {
-			 finish();
-			 return;
-		 }
-
-			 Toast.makeText(this, R.string.save_success_message, Toast.LENGTH_SHORT).show();
-			 return;
+		 Toast.makeText(this, R.string.save_success_message, Toast.LENGTH_SHORT).show();
+		 
+		 finish();
+		 return;
 	 }
 
 	 private void handleFatalError(

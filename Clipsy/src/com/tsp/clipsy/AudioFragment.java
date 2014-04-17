@@ -55,6 +55,8 @@ public class AudioFragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedState) {
+		
+		mPlayer = new MediaPlayer();
 
 		mRelativeLayout = (RelativeLayout) inflater.inflate(R.layout.activity_audio_fragment, container, false); 
 
@@ -126,49 +128,68 @@ public class AudioFragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 		if(resultCode == Activity.RESULT_OK){
-			Uri path = data.getData();
-
-			selectedAudioPath = getRealPathFromURI(path);
-			audioPath.setText(selectedAudioPath);
-
-			//String name = (new File(selectedAudioPath)).getName();
-
-			mPlayer = new MediaPlayer();
-			mSeek.setOnSeekBarChangeListener(this); // listen to seekbar touches
-			prepareSong();
-
-			//audioName.setText(name);
-
-			//MediaMetadataRetriever retrieve = new MediaMetadataRetriever();
-			//retrieve.setDataSource(selectedAudioPath);
-
-			//long durationMs = Long.parseLong(retrieve.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
-
-			//Bitmap thumb = retrieve.getFrameAtTime(durationMs/2, 1);
-
-			//int screenWidth;
-			//Display display = getWindowManager().getDefaultDisplay();
-
-			/*if (android.os.Build.VERSION.SDK_INT >= 13) {
-				Point size = new Point();
-				display.getSize(size);
-				screenWidth = size.x;
+			
+			if (requestCode == 1) {
+				
+				// We've returned from trimming an audio track.
+				// Set the GUI accordingly.
+				
+				String newPath = data.getExtras().getString("path");
+				Uri newUri = Uri.parse("file://" + newPath);
+				selectedAudioPath = getRealPathFromURI(newUri);
+				audioPath.setText(selectedAudioPath);
+				
+				Log.d("audFrag", selectedAudioPath);
+				
+				prepareSong();		
+				
 			} else {
-				screenWidth = display.getWidth();
+			
+				Uri path = data.getData();
+	
+				selectedAudioPath = getRealPathFromURI(path);
+				audioPath.setText(selectedAudioPath);
+	
+				//String name = (new File(selectedAudioPath)).getName();
+	
+				mSeek.setOnSeekBarChangeListener(this); // listen to seekbar touches
+				prepareSong();
+	
+				//audioName.setText(name);
+	
+				//MediaMetadataRetriever retrieve = new MediaMetadataRetriever();
+				//retrieve.setDataSource(selectedAudioPath);
+	
+				//long durationMs = Long.parseLong(retrieve.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+	
+				//Bitmap thumb = retrieve.getFrameAtTime(durationMs/2, 1);
+	
+				//int screenWidth;
+				//Display display = getWindowManager().getDefaultDisplay();
+	
+				/*if (android.os.Build.VERSION.SDK_INT >= 13) {
+					Point size = new Point();
+					display.getSize(size);
+					screenWidth = size.x;
+				} else {
+					screenWidth = display.getWidth();
+				}
+	
+				int newHeight = (screenWidth * thumb.getHeight()/thumb.getWidth());
+				Bitmap newThumb = Bitmap.createScaledBitmap(thumb, screenWidth, newHeight, true);
+	
+				ImageView thumbView = (ImageView) findViewById(R.id.thumbView);
+				thumbView.setImageBitmap(newThumb);
+				thumbView.setAdjustViewBounds(false);
+				thumbView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+	
+				 */
+			
 			}
-
-			int newHeight = (screenWidth * thumb.getHeight()/thumb.getWidth());
-			Bitmap newThumb = Bitmap.createScaledBitmap(thumb, screenWidth, newHeight, true);
-
-			ImageView thumbView = (ImageView) findViewById(R.id.thumbView);
-			thumbView.setImageBitmap(newThumb);
-			thumbView.setAdjustViewBounds(false);
-			thumbView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-
-			 */
 
 
 		} else {
+			
 			Toast.makeText(getActivity().getApplicationContext(), "An error occured. Please try again.",
 					Toast.LENGTH_LONG).show();
 		}

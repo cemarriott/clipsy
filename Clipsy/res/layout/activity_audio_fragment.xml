@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dip"
-            android:text="Ringdroid"
+            android:text="Edit"
             android:textSize="12sp" />
 
         <Button
